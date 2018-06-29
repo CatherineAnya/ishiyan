@@ -18,3 +18,4 @@ Online experiment platform
 
 技术栈：HTML、CSS、jQuery、AJAX、MySQL、Django、Guacamole、VNC
 # 效果展示
+![image](https://user-images.githubusercontent.com/26202472/42084719-177e23ac-7bc1-11e8-8a7d-beef5e6f91bd.png)
