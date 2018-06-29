@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="iShiYan,IT培训,IT教育,编程,在线编程,Linux,Linux教程,Linux操作系统,Python,Python教程,Python基础教程,Java,Java编程,C语言,大数据,Node.js,Hadoop,PHP,Docker,Git,R,SQL,MongoDB,Redis,Swift,Spark,在线实验,IT在线教育,编程入门,项目训练,项目实践,webIDE,软件开发">
+	<meta name="description" content="iShiYan是一个IT在线编程的在线实验平台，让学习者无需配置繁琐的本地环境，随时在线流畅使用。提供编程、运维、测试、云计算、大数据、数据库等全面的IT技术动手实践环境，提供Linux、Python、Java、C语言、Node.js、Hadoop、PHP、Docker、Git、R、SQL、MongoDB、Redis、Swift、Spark等各种热门课程。">
+    <title>爱实验 - {{ title }}</title>
+
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/bootstrap.css' %}">
+
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/base.css' %}">
+
+	<script type="text/javascript" src="{% static 'website/js/jquery.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'website/js/bootstrap.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'website/js/jquery.form.js' %}"></script>
+
+	{% block link %}
+
+	{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-default lw_header lw_header-index">
+        <div class="container lw_container">
+            <div class="navbar-header lw_nav-header">
+                <button type="button" class="navbar-toggle collapsed lw_nav-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand lw_logo" href="/">
+                    <img src="{% static 'website/img/logo.svg' %}" height="65" width="65" alt="ishiyan logo">
+                </a>
+                <p class="lw_logo_desc">爱实验</p>
+                <p class="lw_motto">爱上实验，爱上编程</p>
+            </div>
+
+            <div class="collapse navbar-collapse lw_collapse">
+                <ul class="nav navbar-nav">
+                    <li class="lw_nav1">
+                    	<a href="/courses/">课程</a>
+                    </li>
+                    <li class="lw_nav1">
+                    	<a href="#">路径</a>
+                    </li>
+                    <li class="lw_nav1">
+                        <a href="/discuss/">讨论</a>
+                    </li>
+                </ul>
+                <form action="/courses/" class="navbar-form navbar-left lw_search">
+                    <div class="form-group">
+                    	<div class="input-group">
+                            <input type="text" class="form-control lw_search-input" placeholder="搜索课程" name="query">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">搜索</button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+                <ul id="lw_nav2" class="nav navbar-nav navbar-right lw_nav2">
+                    <li class="login">
+                    	<a href="/login/">登录</a>
+                    </li>
+                    <li>
+                       <a href="/signup/">注册</a>
+                    </li>
+                </ul>
+				<div id="lw_person" class="lw_person">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/message/">
+                                <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/homepage/{{ user.uid }}">
+                                <img src="{% static 'website/img/avatar.jpg' %}" alt="个人头像" id="lw_avatar" class="lw_avatar">
+                            </a>
+                            <div id="lw_user" class="lw_user" style="display: none;">
+                                <div class="lw_arrow"></div>
+                                <div class="lw_user-info">
+                                    <a href="/homepage/{{ user.uid }}">
+                                        <img src="{% static 'website/img/avatar.jpg' %}" alt="个人头像" class="pull-left lw_user-avatar">
+                                    </a>
+                                    <div class="pull-left lw_info-username">
+                                        <span>{{ user.username }}</span>
+                                        <p>今日有效学习0min</p>
+                                    </div>
+                                </div>
+                                <div class="lw_user-links">
+                                    <div class="row">
+                                        <div class="lw_user-links-margin">
+                                            <a class="col-md-6 col-sm-6" href="/homepage/{{ user.uid }}">我的主页</a>
+                                             <a class="col-md-6 col-sm-6" href="/profile/">个人设置</a>
+                                        </div>
+                                        <div class="lw_user-links-margin">
+                                            <a class="col-md-6 col-sm-6" href="/learned/">已学课程</a>
+                                            <a class="col-md-6 col-sm-6" href="/report/">实验报告</a>
+                                        </div>
+                                    </div>
+                                    <div class="lw_logout">
+                                        <a href="/logout/">退出登录</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+	<!-- content -->
+	{% block content %}
+
+	{% endblock %}
+
+    <!-- footer -->
+    <footer class="lw_footer lw_footer-index">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 lw_illustrate">
+			        <img src="{% static 'website/img/code.gif' %}" alt="编程环境">
+			        <span>在线编程环境，1S启动</span>
+		        </div>
+		        <div class=" col-md-3 lw_illustrate">
+			        <img src="{% static 'website/img/course.gif' %}" alt="实验课程">
+			        <span>丰富全面的计算机实验课程</span>
+		        </div>
+		        <div class="col-md-3 lw_illustrate">
+			        <img src="{% static 'website/img/project.gif' %}" alt="项目经验">
+			        <span>各种项目，丰富你的项目经验</span>
+		        </div>
+                <div class="col-md-3 lw_illustrate">
+			        <img src="{% static 'website/img/time.gif' %}" alt="随时随地">
+			        <span>随时随地做实验学编程</span>
+		        </div>
+			</div>
+		</div>
+		<div class="lw_copyright text-center">
+            <span>Copyright @李伟毕设 2018</span>
+            <span class="ver-line"> | </span>
+            <span>爱实验-在线实验平台</span>
+        </div>
+	</footer>
+
+	{% block script %}
+
+	{% endblock %}
+
+	<script type="text/javascript">
+		$(function () {
+		    var responseval = $.ajax({url: "/check_login/", async: false});
+            var result = JSON.parse(responseval.responseText);
+            if (result.login) {
+                $('#lw_nav2').css('display','none');
+                $('#lw_person').css('display','inline-block');
+			}
+		});
+	</script>
+
+    <script type="text/javascript">
+		$(function () {
+		    var timer;
+		    $('#lw_avatar').hover(function () {
+		        $(this).css('box-shadow','0 0 15px rgba(0,0,0,0.3)');
+		        clearTimeout(timer);
+                $('#lw_user').css('display','block');
+            },function () {
+		        timer = setTimeout(function () {
+                    $('#lw_user').hide();
+                },200);
+                $(this).css('box-shadow','none');
+            });
+		    $('#lw_user').hover(function () {
+		        $('#lw_avatar').css('box-shadow','0 0 15px rgba(0,0,0,0.3)');
+		        clearTimeout(timer);
+                $(this).css('display','block');
+            },function () {
+                $(this).hide();
+            });
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link type="text/css" href="{% static 'website/css/jquery.fullpage.css' %}">
+
+    <script type="text/javascript" src="{% static 'website/js/jquery.fullpage.js'%}"></script>
+
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="fullpage" class="fullpage">
+        <div class="section lw_section1">
+            <div id="myCarousel" class="carousel container lw_slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner lw_carousel-inner">
+                    <div class="item active lw_item">
+                        <img class="d-block w-100" src="{% static 'website/img/slide1.jpg' %}" alt="First slide">
+                    </div>
+                    <div class="item lw_item">
+                        <img class="d-block w-100" src="{% static 'website/img/slide2.jpg' %}" alt="Second slide">
+                    </div>
+                    <div class="item lw_item">
+                        <img class="d-block w-100" src="{% static 'website/img/slide3.jpg' %}" alt="Third slide">
+                    </div>
+                </div>
+                <a class="carousel-control lw_left" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control lw_right" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div class="lw_recommend">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h3 class='lw_recommend-title'>
+                                    <span class="lw_title-icon lw_icon-recommend-l lw_title-icon-l"></span>
+                                    <em>课／程／推／荐</em>
+                                    <span class="lw_title-icon lw_icon-recommend-r lw_title-icon-r"></span>
+                                </h3>
+                            </div>
+                            <div class="lw_recommend-course1">
+                            {% for recommend in recommend_list %}
+                            <div class="col-md-3 lw_recommend-course">
+                                <a href="/course/{{ recommend.cid }}" target="_blank" class="lw_course-card">
+                                    <div class="lw_card">
+                                        <img class="lw_course-banner" src="{% static 'website/img/course/' %}{{ recommend.image }}">
+                                        <div class="lw_course-label">
+                                            <label>{{ recommend.label.name }}</label>
+                                        </div>
+                                    </div>
+                                    <div class='lw_course-card-content'>
+                                        <h3 class='lw_course-card-name'>{{ recommend.name }}</h3>
+                                        <div class='lw_course-card-bottom'>
+                                            <div class='lw_course-card-info'>
+                                                <span>推荐指数</span>
+                                                <span class="lw_course-star-box">
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section lw_section2">
+            <div class="lw_recently">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h3 class='lw_recently-title'>
+                                    <span class="lw_title-icon lw_icon-recently-l lw_title-icon-l"></span>
+                                    <em>近／期／好／课</em>
+                                    <span class="lw_title-icon lw_icon-recently-r lw_title-icon-r"></span>
+                                </h3>
+                            </div>
+                            <div class="lw_recently-course1">
+                                {% for recently in recently_list %}
+                                <div class="col-md-3 lw_recently-course">
+                                    <a href="/course/{{ recently.cid }}" target="_blank" class="lw_course-card">
+                                        <div class="lw_card">
+                                            <img class="lw_course-banner" src="{% static 'website/img/course/' %}{{ recently.image }}">
+                                            <div class="lw_course-label">
+                                                <label>{{ recently.label.name }}</label>
+                                            </div>
+                                        </div>
+                                        <div class='lw_course-card-content'>
+                                            <h3 class='lw_course-card-name'>{{ recently.name }}</h3>
+                                            <div class='lw_course-card-bottom'>
+                                                <div class='lw_course-card-info'>
+                                                    <span>推荐指数</span>
+                                                    <span class="lw_course-star-box">
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lw_basic">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h3 class='lw_basic-title'>
+                                    <span class="lw_title-icon lw_icon-basic-l lw_title-icon-l"></span>
+                                    <em>新／手／入／门</em>
+                                    <span class="lw_title-icon lw_icon-basic-r lw_title-icon-r"></span>
+                                </h3>
+                            </div>
+                            <div class="lw_basic-course1">
+                                {% for basic in basic_list %}
+                                <div class="col-md-3 lw_basic-course">
+                                    <a href="/course/{{ basic.cid }}" target="_blank" class="lw_course-card">
+                                        <div class="lw_card">
+                                            <img class="lw_course-banner" src="{% static 'website/img/course/' %}{{ basic.image }}">
+                                            <div class="lw_course-label">
+                                                <label>{{ basic.label.name }}</label>
+                                            </div>
+                                        </div>
+                                        <div class='lw_course-card-content'>
+                                            <h3 class='lw_course-card-name'>{{ basic.name }}</h3>
+                                            <div class='lw_course-card-bottom'>
+                                                <div class='lw_course-card-info'>
+                                                    <span>推荐指数</span>
+                                                    <span class="lw_course-star-box">
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section lw_section3">
+            <div class="lw_front-end">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h3 class='lw_front-end-title'>
+                                    <span class="lw_title-icon lw_icon-frontend-l lw_title-icon-l"></span>
+                                    <em>前／端／开／发</em>
+                                    <span class="lw_title-icon lw_icon-frontend-r lw_title-icon-r"></span>
+                                </h3>
+                            </div>
+                            <div class="lw_front-end-course1">
+                                {% for frontend in frontend_list %}
+                                <div class="col-md-3 lw_front-end-course">
+                                    <a href="/course/{{ frontend.cid }}" target="_blank" class="lw_course-card">
+                                        <div class="lw_card">
+                                            <img class="lw_course-banner" src="{% static 'website/img/course/' %}{{ frontend.image }}">
+                                            <div class="lw_course-label">
+                                                <label>{{ frontend.label.name }}</label>
+                                            </div>
+                                        </div>
+                                        <div class='lw_course-card-content'>
+                                            <h3 class='lw_course-card-name'>{{ frontend.name }}</h3>
+                                            <div class='lw_course-card-bottom'>
+                                                <div class='lw_course-card-info'>
+                                                    <span>推荐指数</span>
+                                                    <span class="lw_course-star-box">
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lw_back-end">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h3 class='lw_back-end-title'>
+                                    <span class="lw_title-icon lw_icon-backend-l lw_title-icon-l"></span>
+                                    <em>后／端／开／发</em>
+                                    <span class="lw_title-icon lw_icon-backend-r lw_title-icon-r"></span>
+                                </h3>
+                            </div>
+                            {% for backend in backend_list %}
+                                {% if forloop.first %}
+                                <div class="col-md-6 lw_back-end-course1">
+                                    <a href="/course/{{ backend.cid }}" target="_blank" class="lw_course-card">
+                                        <div class="lw_card">
+                                            <img class="lw_course-banner1" src="{% static 'website/img/course/' %}{{ backend.image }}">
+                                            <div class="lw_course-label">
+                                                <label>{{ backend.label.name }}</label>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% elif forloop.counter == 4 %}
+                                <div class="col-md-3 lw_back-end-course lw_back-end-course2">
+                                    <a href="/course/{{ backend.cid }}" target="_blank" class="lw_course-card">
+                                        <div class="lw_card">
+                                            <img class="lw_course-banner" src="{% static 'website/img/course/' %}{{ backend.image }}">
+                                            <div class="lw_course-label">
+                                               <label>{{ backend.label.name }}</label>
+                                            </div>
+                                        </div>
+                                        <div class='lw_course-card-content'>
+                                            <h3 class='lw_course-card-name'>{{ backend.name }}</h3>
+                                            <div class='lw_course-card-bottom'>
+                                                <div class='lw_course-card-info'>
+                                                    <span>推荐指数</span>
+                                                    <span class="lw_course-star-box">
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% else %}
+                                <div class="col-md-3 lw_back-end-course">
+                                    <a href="/course/{{ backend.cid }}" target="_blank" class="lw_course-card">
+                                        <div class="lw_card">
+                                            <img class="lw_course-banner" src="{% static 'website/img/course/' %}{{ backend.image }}">
+                                            <div class="lw_course-label">
+                                                <label>{{ backend.label.name }}</label>
+                                            </div>
+                                        </div>
+                                        <div class='lw_course-card-content'>
+                                            <h3 class='lw_course-card-name'>{{ backend.name }}</h3>
+                                            <div class='lw_course-card-bottom'>
+                                                <div class='lw_course-card-info'>
+                                                    <span>推荐指数</span>
+                                                    <span class="lw_course-star-box">
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                        <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section lw_section4">
+            <div class="lw_cloud-big">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h3 class='lw_cloud-big-title'>
+                                    <span class="lw_title-icon lw_icon-cloudbig-l lw_title-icon-l"></span>
+                                    <em>云／计／算／与／大／数／据</em>
+                                    <span class="lw_title-icon lw_icon-cloudbig-r lw_title-icon-r"></span>
+                                </h3>
+                            </div>
+                        </div>
+                        {% for cloudbig in cloudbig_list %}
+                            {% if forloop.first %}
+                            <div class="col-md-3 lw_cloud-big-margin">
+                                <a href="/course/{{ cloudbig.cid }}" target="_blank" class="lw_course-card">
+                                    <div class="lw_card">
+                                        <img class="lw_course-banner2" src="{% static 'website/img/course/' %}{{ cloudbig.image }}">
+                                        <div class="lw_course-label lw_course-label1">
+                                            <label>{{ cloudbig.label.name }}</label>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% elif forloop.counter == 2 or forloop.counter == 5 or forloop.counter == 8 %}
+                            <div class="col-md-3 lw_cloud-big-course lw_cloud-big-course1">
+                                <a href="/course/{{ cloudbig.cid }}" target="_blank" class="lw_course-card">
+                                    <div class="lw_card">
+                                        <img class="lw_course-banner" src="{% static 'website/img/course/' %}{{ cloudbig.image }}">
+                                        <div class="lw_course-label">
+                                            <label>{{ cloudbig.label.name }}</label>
+                                        </div>
+                                    </div>
+                                    <div class='lw_course-card-content'>
+                                        <h3 class='lw_course-card-name'>{{ cloudbig.name }}</h3>
+                                        <div class='lw_course-card-bottom'>
+                                            <div class='lw_course-card-info'>
+                                                <span>推荐指数</span>
+                                                <span class="lw_course-star-box">
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% else %}
+                            <div class="col-md-3 lw_cloud-big-course">
+                                <a href="/course/{{ cloudbig.cid }}" target="_blank" class="lw_course-card">
+                                    <div class="lw_card">
+                                        <img class="lw_course-banner" src="{% static 'website/img/course/' %}{{ cloudbig.image }}">
+                                        <div class="lw_course-label">
+                                            <label>{{ cloudbig.label.name }}</label>
+                                        </div>
+                                    </div>
+                                    <div class='lw_course-card-content'>
+                                        <h3 class='lw_course-card-name'>{{ cloudbig.name }}</h3>
+                                        <div class='lw_course-card-bottom'>
+                                            <div class='lw_course-card-info'>
+                                                <span>推荐指数</span>
+                                                <span class="lw_course-star-box">
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                    <i class="glyphicon glyphicon-star lw_icon-staron"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section lw_section5">
+            <div class="lw_learn-path">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="col-md-8 col-md-offset-2 lw_learn-path-padding">
+                            <h3 class='lw_learn-path-title'>
+                                <span class="lw_title-icon lw_icon-learnpath-l lw_title-icon-l"></span>
+                                <em>学／习／路／径</em>
+                                   <span class="lw_title-icon lw_icon-learnpath-r lw_title-icon-r"></span>
+                               </h3>
+                           </div>
+                           <div class="col-md-3 lw_learn-path-items">
+                            <a class="lw_learn-path-item" href="">
+                                <img src="{% static 'website/img/ok.png' %}">
+                                <div class="lw_learn-path-name">新手入门</div>
+                                <div class="lw_learn-path-courses">
+                                    6门课程
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-3 lw_learn-path-items">
+                            <a class="lw_learn-path-item" href="">
+                                <img src="{% static 'website/img/python.png' %}">
+                                <div class="lw_learn-path-name">Python研发工程师</div>
+                                <div class="lw_learn-path-courses">
+                                    89门课程
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-3 lw_learn-path-items">
+                            <a class="lw_learn-path-item" href="">
+                                <img src="{% static 'website/img/bigdata.png' %}">
+                                <div class="lw_learn-path-name">大数据工程师</div>
+                                <div class="lw_learn-path-courses">
+                                    44门课程
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-3 lw_learn-path-items">
+                            <a class="lw_learn-path-item" href="">
+                                <img src="{% static 'website/img/linux.png' %}">
+                                <div class="lw_learn-path-name">Linux研发工程师</div>
+                                <div class="lw_learn-path-courses">
+                                    31门课程
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script%}
+    <script type="text/javascript">
+		$(function () {
+			$('#fullpage').fullpage({
+				verticalCentered: false,
+				anchors: ['panel1','panel2','panel3','panel4','panel5'],
+				scrollBar: true,
+				fixedElements: '#header',
+				menu: '#fullpageMenu',
+				navigation: true
+			});
+		});
+	</script>
+{% endblock %}

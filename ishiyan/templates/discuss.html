@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/discuss.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container lw_discuss-layout-hasside layout-margin-top">
+        <div class="row">
+            <div class="col-md-12 lw_discuss-layout-body">
+                <div class="content">
+                    <ul class="nav nav-tabs question-types" role="tablist">
+                        <li id="all" role="presentation">
+                            <a href="/discuss/?node=all" aria-controls="all" role="tab" toggle="tab">全部</a>
+                        </li>
+                        {% for allnode in allnode_list %}
+                        <li id="node_{{ allnode.id }}" role="presentation" >
+                            <a href="/discuss/?node={{ allnode.id }}" aria-controls="course" role="tab" toggle="tab">{{ allnode.name }}</a>
+                        </li>
+                        {% endfor %}
+                        <div class="pull-right lw_discuss-layout-side">
+                            <a href="/publish/">我要发帖</a>
+                        </div>
+                    </ul>
+                    <div class="menu-txt-box">
+                        <ul class="menu-txt clearfix">
+                            <li id="order_0">
+                                <a>最新回复</a>
+                            </li>
+                            <li class="menu-pipe">|</li>
+                            <li id="order_1">
+                                <a>最新发表</a>
+                            </li>
+                            <li class="menu-pipe">|</li>
+                            <li id="order_2">
+                                <a>最热</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active">
+                            <ul class="row question-items">
+                                {% for publish in publish_list %}
+                                <li class="question-item">
+                                    <div class="col-md-10">
+                                        <div class="col-sm-2 question-item-author">
+                                            <div class="user-avatar ">
+                                                <a class="avatar" href="/homepage/{{ publish.user.uid }}" target="_blank">
+                                                    <img src="{% static 'website/img/avatar.jpg' %}" title="{{ publish.user.username }}">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <h4>
+                                                <a class="question-item-title" href="/question/{{ publish.id }}" target="_blank">{{ publish.title }}</a>
+                                            </h4>
+                                            <div class="question-item-summary">
+                                                <div class="user-username ">
+                                                    <a class="username" href="/homepage/{{ publish.user.uid }}/" target="_blank">{{ publish.user.username }}</a>
+                                                </div>
+                                                <span class="question-item-date">{{ publish.datetime }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 question-item-rank">
+                                        <div class="question-item-answered">
+                                            <div>{{ publish.replay_num }}</div>
+                                            <div>回复</div>
+                                        </div>
+                                        <div class="question-item-views">
+                                            <div>{{ publish.view_num }}</div>
+                                            <div>查看</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="col-md-12 lw_paging">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <li id="lw_prev">
+                                            <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">上一页</span>
+                                            </a>
+                                        </li>
+                                        <li id="page1"><a href="#">1</a></li>
+                                        <li id="page2"><a href="#">2</a></li>
+                                        <li id="page3"><a href="#">3</a></li>
+                                        <li id="page4"><a href="#">4</a></li>
+                                        <li id="page5"><a href="#">5</a></li>
+                                        <li id="lw_next">
+                                            <a href="#" aria-label="Next">
+                                                <span aria-hidden="true">下一页</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script%}
+    <script type="text/javascript">
+		$(function () {
+			function getUrlParam(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return decodeURI(r[2]);
+                return null;
+            }
+            var uri = getUrlParam('node');
+			if (uri === null || uri === 'all') {
+			    $('#all').addClass('active');
+			    $('#order_0 > a').attr('href', '/discuss/?node=all&order=0');
+			    $('#order_1 > a').attr('href', '/discuss/?node=all&order=1');
+			    $('#order_2 > a').attr('href', '/discuss/?node=all&order=2');
+            }
+            else {
+			     $('#all').removeClass('active');
+			     var id = "#node_" + uri;
+			     $(id).addClass('active');
+			     $('#order_0 > a').attr('href', '/discuss/?node=' + uri + '&order=0');
+			     $('#order_1 > a').attr('href', '/discuss/?node=' + uri + '&order=1');
+			     $('#order_2 > a').attr('href', '/discuss/?node=' + uri + '&order=2');
+            }
+
+            var uri_1 = getUrlParam('order');
+            var id_1 = "#order_" + uri_1;
+            $(id_1).addClass('selected');
+		});
+	</script>
+
+    <script type="text/javascript">
+		$(function () {
+			function getUrlParam(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return decodeURI(r[2]);
+                return null;
+            }
+            var page = Number(getUrlParam('page'));
+			if (!page) {
+			    page = 1;
+            }
+			var total_page = {{ total_page }};
+			var uri = window.location.pathname + window.location.search;
+			if (uri.indexOf('page=') === -1) {
+			    if (uri.indexOf('?') !== -1) {
+                    uri += '&page=1';
+                } else {
+			        uri += '?page=1';
+                }
+            }
+			if (page === 1) {
+			    $('#lw_prev').addClass('disabled');
+			    $('#page1').addClass('active');
+            }
+            else if (page === 2) {
+			    $('#page2').addClass('active');
+            }
+            else if (page === total_page - 1) {
+			    $('#page1 > a').text(page - 3);
+			    $('#page2 > a').text(page - 2);
+			    $('#page3 > a').text(page - 1);
+			    $('#page4 > a').text(page);
+			    $('#page5 > a').text(page + 1);
+			    $('#page4').addClass('active');
+            }
+            else if (page === total_page) {
+			    $('#lw_next').addClass('disabled');
+                $('#page1 > a').text(page - 4);
+			    $('#page2 > a').text(page - 3);
+			    $('#page3 > a').text(page - 2);
+			    $('#page4 > a').text(page - 1);
+                $('#page5 > a').text(page);
+			    $('#page5').addClass('active');
+            }
+            else {
+			    $('#page1 > a').text(page - 2);
+                $('#page2 > a').text(page - 1);
+                $('#page3 > a').text(page);
+                $('#page4 > a').text(page + 1);
+			    $('#page5 > a').text(page + 2);
+			    $('#page3').addClass('active');
+            }
+            for (var i = 1; i <= 5; i++) {
+			    $('#page' + i + ' > a').attr('href', uri.replace(/page=\d+/, 'page=' + $('#page' + i + ' > a').text()));
+            }
+            $('#lw_prev > a').attr('href',uri.replace(/page=\d+/,'page=' + (page - 1)));
+            $('#lw_next > a').attr('href',uri.replace(/page=\d+/,'page=' + (page + 1)));
+		});
+	</script>
+{% endblock %}

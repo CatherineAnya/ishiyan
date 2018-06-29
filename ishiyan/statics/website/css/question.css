@@ -1,0 +1,218 @@
+body {
+	background-color: #f8fafc;
+}
+/* 路径导航 */
+.lw_question-layout-hasside {
+    min-height: 100%;
+    margin-top: 25px;
+}
+.breadcrumb {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 13px;
+    background: transparent;
+    border-radius: 0;
+}
+.breadcrumb li a {
+    color: #666;
+    text-decoration: none;
+}
+.breadcrumb li a:hover {
+    color: #00c894;
+}
+/* 问题 */
+.lw_question-layout-body, .lw_question-layout-side {
+    padding: 0 5px;
+}
+.question-detail {
+    background: #fff;
+    padding: 30px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 1px #ccc;
+}
+.content {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 30px 30px 60px 30px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+.question-headline .question-title {
+    font-size: 20px;
+    font-weight: 800;
+    word-break: break-all;
+    width: 650px;
+    color: #484e54;
+}
+.question-headline .question-figure {
+    float: right;
+    margin-right: 20px;
+    padding-top: 5px;
+    color: #a4a4a4;
+    font-size: 12px;
+}
+.question-author {
+    margin-top: 16px;
+    font-size: 13px;
+}
+.user-avatar {
+    position: relative;
+    display: inline-block;
+}
+.user-avatar .avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.question-author img {
+    display: inline-block;
+    width: 36px;
+    margin-right: 6px;
+    border-radius: 50%;
+}
+.user-username {
+    display: inline-block;
+}
+.user-username .username {
+    color: #999;
+    font-size: 14px;
+    text-decoration: none;
+}
+.question-author span {
+    margin: 0 15px;
+}
+.question-author span a {
+    text-decoration: none;
+}
+.question-content {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+.markdown-body {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+/* 回复 */
+.question-answers {
+    background: #fff;
+    padding: 30px;
+    margin-top: 15px;
+    box-shadow: 0 1px 1px #ccc;
+    border: 1px solid #eee;
+}
+.p-title {
+    font-size: 18px;
+    color: #666;
+    padding-bottom: 6px;
+}
+.answer-item {
+    margin-top: 30px;
+}
+.answer-head {
+    float: left;
+    width: 40px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.answer-item img {
+    display: inline-block;
+    width: 36px;
+    margin: -10px 5px 0 0;
+    border-radius: 50%;
+}
+.answer-detail {
+    position: relative;
+    margin-left: 55px;
+    padding-bottom: 5px;
+}
+.answer-detail .comment-reply a {
+    color: #367eba;
+    font-size: 13px;
+    margin: 0 2px;
+}
+.answer-content {
+    margin: 5px 0 20px;
+    font-size: 15px;
+    color: #484e54;
+    word-wrap: break-word;
+}
+.markdown-body > :first-child {
+    margin-top: 0 !important;
+}
+.answer-content textarea {
+    width: 100%;
+    height: 200px;
+    resize: none;
+}
+.markdown-body * {
+    box-sizing: border-box;
+}
+.answer-detail .create-time {
+    display: inline-block;
+    padding: 15px 0 10px;
+    color: #a4a4a4;
+}
+.answer-detail .commentBtn, .answer-detail > a {
+    float: right;
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+/* 回帖 */
+#test-editormd {
+    margin-top: 15px;
+}
+.lw_submit {
+    margin-right: 20px !important;
+}
+.lw_submitbtn:hover {
+	background-color: #00c894;
+	border-color: #00a075;
+}
+/* 侧边栏 */
+.side-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 14px 0;
+    color: #fff;
+    background: #367eba;
+    font-size: 20px;
+    border: none;
+}
+.side-btn:hover {
+    color: #fff;
+    background: #00c894;
+}
+.sidebox {
+    margin-bottom: 10px;
+    padding: 15px;
+    background: #fff;
+}
+.sidebox-header {
+    overflow: hidden;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #eee;
+}
+.sidebox-title {
+    float: left;
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+}
+.sidebox-body {
+    padding: 10px 0;
+    font-size: 14px;
+}
+.side-list-body a {
+    display: block;
+    padding: 10px;
+    color: #565a61;
+    font-size: 14px;
+    word-break: break-all;
+    word-wrap: break-word;
+    text-decoration: none;
+}

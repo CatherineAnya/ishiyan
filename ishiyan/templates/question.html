@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/question.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'website/editor.md-master/css/editormd.css' %}">
+    <script type="text/javascript" src="{% static 'website/editor.md-master/editormd.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container lw_question-layout-hasside layout-margin-top">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/discuss/">讨论区</a>
+            </li>
+            <li>
+                <a href="/discuss/?node={{ publish.node.id }}">{{ publish.node.name }}</a>
+            </li>
+            <li class="active">
+                <a href="#">{{ publish.title }}</a>
+            </li>
+        </ol>
+        <div class="row">
+            <div class="col-md-9 lw_question-layout-body">
+                <div class="content question-detail">
+                    <div class="question-headline">
+                        <span class="question-title">{{ publish.title }}</span>
+                        <span class="question-figure">{{ publish.replay_num }}回复</span>
+                        <span class="question-figure">{{ publish.view_num }}查看</span>
+                    </div>
+                    <div class="question-author">
+                        <div class="user-avatar ">
+                            <a class="avatar" href="/homepage/{{ publish.user.uid }}" target="_blank">
+                                <img src="{% static 'website/img/avatar.jpg' %}" title="{{ publish.user.username }}">
+                            </a>
+                        </div>
+                        <div class="user-username ">
+                            <a class="username" href="/homepage/{{ publish.user.uid }}" target="_blank">{{ publish.user.username }}</a>
+                        </div>
+                        <span>{{ publish.datetime }}</span>
+                        <span>
+                            <a href="/discuss/?node={{ publish.node.id }}">{{ publish.node.name }}</a>
+                        </span>
+                    </div>
+                    <div class="question-content markdown-body">
+                        {% autoescape off %}
+                        {{ publish.content }}
+                        {% endautoescape %}
+                    </div>
+                </div>
+                <div class="question-answers">
+                    <p class="p-title">全部回复</p>
+                    <hr/>
+                    {% for replay in replay_list %}
+                    <div class="answer-item">
+                        <div class="answer-head">
+                            <div class="user-avatar ">
+                                <a class="avatar" href="/homepage/{{ replay.user.uid }}" target="_blank">
+                                    <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100" title="{{ replay.user.username }}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="answer-detail">
+                            <span class="comment-reply">
+                                <div class="user-username ">
+                                    <a class="username" href="/homepage/{{ replay.user.uid }}" target="_blank">{{ replay.user.username }}</a>
+                                </div>
+                            </span>
+                            <div class="answer-content markdown-body">
+                                {% autoescape off %}
+                                {{ replay.content }}
+                                {% endautoescape %}
+                            </div>
+                            <div>
+                                <span class="create-time">{{ replay.datetime }}</span>
+                                <hr/>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <form id="lw_publish-form" class="form-horizontal" method="POST" onsubmit="return check()">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="tabpanel mkeditor">
+                            <div class="tab-content">
+                                <div class="tab-pane active mkeditor-editor" id="mkeditor-editor" role="tabpanel">
+                                    <div id="test-editormd">
+                                        <textarea style="display:none;" id="ts"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lw_submit">
+                            <input class="pull-right btn btn-primary lw_submitbtn" id="submit" name="submit" type="submit" value="回复帖子">
+                        </div>
+                    </div>
+                    <div id="lw_question-error" class="form-group lw_error-msg" style="display: none;">
+                        <div class="alert alert-danger" role="alert"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 lw_question-layout-side">
+                <a class="btn side-btn" data-toggle="modal" href="/publish/">我要发帖</a>
+                <div class="sidebox side-list related-question">
+                    <div class="sidebox-header">
+                        <h4 class="sidebox-title">相关帖子</h4>
+                    </div>
+                    <div class="sidebox-body side-list-body">
+                        <a href="/questions/76627" target="_blank">cront备份日志日期格式到底哪出了问题啊</a>
+                        <a href="/questions/76459" target="_blank">连续学习天数怎么断掉了</a>
+                        <a href="/questions/76603" target="_blank">No module named PyQt5.QtCore</a>
+                        <a href="/questions/76581" target="_blank">xfce显示资源不可用</a>
+                        <a href="/questions/76522" target="_blank">这是报的什么错，照着文档敲的呀，怎么改</a>
+                        <a href="/questions/76592" target="_blank">反馈  变量设置方式 内容错误</a>
+                        <a href="/questions/76530" target="_blank">无论选什么课程进去都是hello world</a>
+                        <a href="/questions/76577" target="_blank">没看出来结果有啥问题，就是没法提交</a>
+                        <a href="/questions/76578" target="_blank">题目描述有误</a>
+                        <a href="/questions/76344" target="_blank">thinkPHP 模型 （嘤嘤嘤小白求助）</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        $(function() {
+            var testEditor = editormd("test-editormd", {
+                width  : "97%",
+                height : 340,
+                path   : "/statics/website/editor.md-master/lib/",
+                // appendMarkdown : md,
+                saveHTMLToTextarea : true
+            });
+
+            //testEditor.getMarkdown();       // 获取 Markdown 源码
+            //testEditor.getHTML();           // 获取 Textarea 保存的 HTML 源码
+            //testEditor.getPreviewedHTML();  // 获取预览窗口里的 HTML，在开启 watch 且没有开启 saveHTMLToTextarea 时使用
+        });
+    </script>
+    <script type="text/javascript">
+        function check() {
+            var content = document.getElementById("ts").value;
+
+            if (content !== '') {
+                $('#lw_question-error').css('display','none');
+                return true;
+            }
+            else {
+                $('#lw_question-error').css('display','block');
+                $('#lw_question-error > div').text('内容不能为空。');
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

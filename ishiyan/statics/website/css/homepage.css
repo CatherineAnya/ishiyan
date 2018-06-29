@@ -1,0 +1,268 @@
+body {
+	background-color: #f8fafc;
+	font-size: 12px;
+}
+.lw_homepage-layout {
+    min-height: 100%;
+    margin-top: 25px;
+}
+.lw_homepage-layout-body {
+    padding: 0 5px;
+}
+.lw_userinfo-banner {
+    background: none;
+    padding: 5px;
+    border: none;
+}
+.lw_userinfo-banner .lw_banner-container {
+    background: #fff;
+    padding: 20px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    height: 150px;
+    border: 1px solid #eee;
+}
+.lw_userinfo-banner-avatar {
+	margin-top: 13px;
+    margin-right: 30px;
+    text-align: center;
+}
+.user-avatar {
+    position: relative;
+    display: inline-block;
+}
+.lw_userinfo-banner-avatar .user-avatar .avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.lw_userinfo-banner-details {
+    margin-top: 5px;
+}
+.lw_userinfo-banner-details > div {
+    margin-bottom: 13px;
+}
+.lw_userinfo-banner-meta .username {
+    font-weight: 700;
+    font-size: 22px;
+    color: #00c894;
+}
+.lw_userinfo-banner-meta .edit-info {
+    font-size: 12px;
+    display: inline-block;
+}
+.lw_userinfo-banner-meta .edit-info .edit-profile {
+    font-size: 18px;
+    color: #666;
+    margin-left: 10px;
+}
+.lw_userinfo-banner-status {
+    color: #666;
+    font-size: 14px;
+}
+.lw_userinfo-banner-status > * {
+    display: inline-block;
+    margin-right: 10px;
+}
+.join-date {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #666;
+    letter-spacing: .5px;
+    line-height: 20px;
+}
+.lw_userinfo-banner-time {
+    width: 270px;
+    text-align: center;
+    height: 110px;
+    border: 1px dashed #eee;
+    border-radius: 5px;
+}
+.lw_userinfo-banner-time .userinfo-time-wall {
+    height: 100%;
+    overflow: hidden;
+}
+.lw_userinfo-banner-time .userinfo-time-wall .user-count {
+    height: 81px;
+    padding: 30px 0 16px;
+    font-size: 14px;
+    color: #a4a4a4;
+}
+.info-text {
+    font-size: 16px;
+    color: #666;
+}
+.lw_homepage-courses {
+    margin-top: 10px;
+}
+.content {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #eee;
+    min-height: 182px;
+}
+.nav-tabs {
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover,
+.nav-tabs > li > a:focus, .nav-tabs > li > a:hover {
+    color: #4c5157;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-bottom-color: #0c9;
+}
+.nav-tabs > li > a {
+    margin: 0 48px 0 0;
+    padding: 0 0 4px;
+    color: #565a61;
+    background-color: transparent;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid transparent;
+}
+span.label {
+    display: inline-block;
+    margin: 10px 3px 16px 3px;
+    padding: 6px 16px;
+    border: none;
+    font-size: 14px;
+    font-weight: 100;
+    color: #0c9;
+    background: #E7F8F2;
+}
+#lw_learned-text,#lw_uploaded-text {
+    color: #999;
+    font-size: 16px;
+    text-align: center;
+}
+.lw_courses-list-wrapper {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-img img {
+    width: 100%;
+    height: 100%;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-img .lw_course-progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #eee;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-detail {
+    padding: 30px 40px;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-detail .lw_course-name {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #666;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-detail .lw_course-name > a {
+    color: #666;
+    text-decoration: none;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-detail .lw_course-name .action-more {
+    font-size: 14px;
+    color: #999;
+    padding-right: 30px;
+}
+.lw_delete-btn {
+	display: none;
+	margin-top: 30px;
+	width: 100px;
+	float: right;
+	margin-right: -65px;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-detail .lw_last-learn {
+    font-size: 14px;
+    margin-bottom: 19px;
+    color: #666;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-detail .lw_course-relate-data {
+    font-size: 14px;
+    color: #999;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-detail .lw_course-relate-data .btn-primary {
+    display: inline-block;
+    width: 130px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 28px;
+    border: none;
+    padding: 4px;
+    margin: 15px 543px 0 0;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-detail .lw_course-relate-data .btn-primary:hover {
+    background-color: #08bf91;
+}
+/* 实验报告 */
+.lw_report-btn {
+    margin-right: 10px;
+}
+.lw_report-course > a {
+    font-size: 14px;
+    color: #08bf91 !important;
+    line-height: 24px;
+}
+.lw_report-lab > a {
+    font-size: 12px;
+    color: #93999F;
+    line-height: 24px;
+}
+.lw_report-content {
+    font-size: 16px;
+}
+.lw_report-course > a:hover, .lw_report-lab > a:hover {
+    color: #08bf91;
+}
+.lw_report-course > a, .lw_report-lab > a {
+    color: #666;
+    text-decoration: none;
+}
+.lw_courses-list-wrapper .lw_courses-list-item .lw_course-detail .lw_report-course .action-more {
+    font-size: 14px;
+    color: #999;
+    padding-right: 30px;
+}
+/* 分页 */
+.lw_paging {
+    text-align: center;
+    clear: both;
+}
+/* 下载实验报告 */
+.modal-dialog {
+    width: 768px;
+    margin: 80px auto;
+}
+.modal-content {
+    border-radius: 4px;
+    padding: 20px;
+}
+.modal-header {
+    color: #4c5157;
+    border-bottom: 2px solid rgba(0,0,0,.2);
+    overflow: hidden;
+}
+.modal-header h3, .modal-header h4 {
+    margin: 0;
+    font-weight: 700;
+    color: #4c5157;
+}
+.modal-body {
+    padding: 30px 15px;
+    font-size: 16px;
+}
+.modal .modal-body > div {
+    margin-bottom: 15px;
+}
+#share-desktop-modal input {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.modal-footer {
+    margin-top: 30px;
+}

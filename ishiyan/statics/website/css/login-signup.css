@@ -1,0 +1,50 @@
+body {
+	background-color: #f8fafc;
+}
+.lw_login-container,.lw_signup-container {
+	margin-top: 47px;
+	background-color: #fff;
+	border: 1px solid #F9F9F9;
+	box-shadow: 0 0 15px #494949;
+	margin-bottom: 6px;
+}
+.lw_title {
+	margin-top: 20px;
+	padding: 5px;
+	border-bottom: 2px solid #f8faf8;
+	color: #525252;
+	font-size: 20px;
+}
+.lw_login,.lw_signup {
+	margin-top: 30px;
+}
+.lw_username,.lw_password {
+	margin-bottom: 20px;
+}
+.lw_usr,.lw_pwd,.lw_email,.lw_phone,.lw_verify {
+	margin-bottom: 20px;
+}
+.form-group {
+	color: #999;
+}
+.lw_submit {
+	margin: 25px 0;
+	text-align: center;
+}
+.lw_submitbtn {
+	width: 352px;
+}
+.lw_submitbtn:hover {
+	background-color: #00c894;
+	border-color: #00a075;
+}
+.lw_login-footer {
+	text-align: center;
+	margin-bottom: 20px;
+}
+.lw_login-footer span a {
+	padding: 5px 20px;
+}
+.lw_login-footer span a:hover {
+	color: #00c894;
+}

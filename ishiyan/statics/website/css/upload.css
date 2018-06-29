@@ -1,0 +1,40 @@
+body {
+	background-color: #f8fafc;
+}
+.lw_upload-container {
+	margin-top: 47px;
+	background-color: #fff;
+	border: 1px solid #F9F9F9;
+	box-shadow: 0 0 15px #494949;
+	margin-bottom: 6px;
+}
+.lw_title {
+	margin-top: 20px;
+	padding: 5px;
+	border-bottom: 2px solid #f8faf8;
+	color: #525252;
+	font-size: 20px;
+}
+.lw_upload {
+	margin-top: 30px;
+}
+#lw_upload-form > p {
+	color: #888;
+}
+.lw_upload-course-name,.lw_upload-course-label,.lw_upload-course-description,.lw_upload-course-pic,.lw_upload-course-labs {
+	margin-bottom: 20px;
+}
+.form-group {
+	color: #999;
+}
+.lw_submit {
+	margin: 25px 0;
+	text-align: center;
+}
+.lw_uploadbtn {
+	width: 352px;
+}
+.lw_uploadbtn:hover {
+	background-color: #00c894;
+	border-color: #00a075;
+}

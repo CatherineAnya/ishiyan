@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>爱实验 - {{ title }}</title>
+
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'website/css/startlab.css' %}">
+
+    <script type="text/javascript" src="{% static 'website/js/jquery.js' %}"></script>
+
+    <style>
+        #lw_lab-console #lw_lab-container {
+            position: relative;
+            width: 19%;
+            height: 100%;
+            background: #f9f9f9;
+        }
+        #lw_lab-console #display {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 81%;
+            height: 100%;
+            background: #000;
+        }
+        .share-desktop {
+            display: block;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 19%;
+            padding: 50px 18px 0 18px;
+            color: #00c894;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="lw_lab-console">
+        <div id="lw_lab-container">
+            <div class="container">
+                <div role="tabpanel" class="tab-pane">
+                    <div class="share-desktop">
+                        <p>你正在以<span style="color: #1b6d85;">协作模式</span>查看<span><a href="/homepage/{{ user.uid }}" target="_blank" style="color: rgb(255, 102, 102); font-size: 14px; text-decoration: none;">{{ user.username }}</a></span>的<span>变量和数据类型</span>实验的桌面。</p>
+                        <p>查看更多精彩课程内容请返回爱实验！</p>
+                        <p><a href="/" class="btn btn-primary" style="color: rgb(255, 255, 255); font-size: 14px;">&lt; 返回爱实验</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if not port %}
+        <div>当前桌面已过期。</div>
+        {% else %}
+        <div id="desktop">
+            <div id="display">
+                <div id="blank" style="display: none; position: absolute; top: 0px; left: 0px;width: 100%; height: 100%;"></div>
+                <iframe src="http://120.78.157.247:8080/guacamole/?username={{ port }}&password={{ port }}" frameborder="0" width="100%" scrolling="no" height="100%"></iframe>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+{% extends 'homepage.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container lw_homepage-layout">
+        <div class="row">
+            <div class="col-md-12 lw_homepage-layout-body">
+                <div class="content" role="tabpanel" style="min-height: 343px;">
+                    <ul class="nav nav-tabs" rolw="tablist">
+                        <li role="presentation" class="active">
+                            <a href="javascript:;" role="tab">已学课程(<span id="latest-learn-num" class="latest-learn-num">{{ learn_count }}</span>)</a>
+                        </li>
+                    </ul>
+                    <p id="lw_learned-text" style="display: none; margin-top: 50px;">目前还没有学习过课程哦！</p>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active">
+                            {% for learn_course in learn_course_list %}
+                            <section class="lw_courses-list-wrapper">
+                                <div class="lw_courses-list-item">
+                                    <div class="row">
+                                        <div class="lw_course-img col-md-4">
+                                            <a href="/course/{{ learn_course.course.cid }}">
+                                                <img alt="{{ learn_course.course.name }}" src="{% static 'website/img/course/' %}{{ learn_course.course.image }}">
+                                            </a>
+                                            <div class="lw_course-progress-bar">
+                                                <div class="progress-bar  progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5.88235294118%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="lw_course-detail col-md-8">
+                                            <p class="lw_course-name">
+                                                <a href="/course/{{ learn_course.course.cid }}">{{ learn_course.course.name }}</a>
+                                                <span class="lw_course-delete">
+                                                    <span role="button" href="javascript:;" id="action-more" class="action-more pull-right">
+                                                        更多
+                                                    </span>
+                                                    <a type="button" id="lw_delete-btn" class="btn btn-default btn-sm btn-action lw_delete-btn">删除记录<span class="lw_hidden" hidden>{{ learn_course.id }}</span></a>
+                                                </span>
+                                            </p>
+                                            <p class="lw_last-learn" style="">上次学到：{{ learn_course.last_lab.name }}</p>
+                                            <p class="lw_course-relate-data">
+                                                <a href="/course/{{ learn_course.course.cid }}" class="btn btn-primary pull-right">继续实验</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 lw_paging">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li id="lw_prev">
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">上一页</span>
+                            </a>
+                        </li>
+                        <li id="page1"><a href="#">1</a></li>
+                        <li id="page2"><a href="#">2</a></li>
+                        <li id="page3"><a href="#">3</a></li>
+                        <li id="page4"><a href="#">4</a></li>
+                        <li id="page5"><a href="#">5</a></li>
+                        <li id="lw_next">
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">下一页</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script%}
+    <script type="text/javascript">
+		$(function () {
+			$('.lw_course-delete').click(function () {
+				$('.lw_delete-btn',this).toggle('slow');
+			});
+
+			var count = $('#latest-learn-num').text();
+
+			if (count == 0) {
+			    $('#lw_learned-text').show();
+            }
+            else {
+			    $('#lw_learned-text').hide();
+            }
+            // 删除课程
+            $('.lw_delete-btn',this).click(function () {
+                var learn_id = $('.lw_hidden',this).text();
+                $.get("/delete_learn/", {learn: learn_id},
+                    function (responseText) {
+                        if (responseText.success) {
+                            window.location.reload();
+                        }
+                        else
+                            alert(responseText.message);
+                    }
+                );
+            });
+		});
+	</script>
+
+    <!--分页技术-->
+    <script type="text/javascript">
+		$(function () {
+			function getUrlParam(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return decodeURI(r[2]);
+                return null;
+            }
+            var page = Number(getUrlParam('page'));
+			if (!page) {
+			    page = 1;
+            }
+			var total_page = 30;
+			var uri = window.location.pathname + window.location.search;
+			if (uri.indexOf('page=') === -1) {
+			    if (uri.indexOf('?') !== -1) {
+                    uri += '&page=1';
+                } else {
+			        uri += '?page=1';
+                }
+            }
+			if (page === 1) {
+			    $('#lw_prev').addClass('disabled');
+			    $('#page1').addClass('active');
+            }
+            else if (page === 2) {
+			    $('#page2').addClass('active');
+            }
+            else if (page === total_page - 1) {
+			    $('#page1 > a').text(page - 3);
+			    $('#page2 > a').text(page - 2);
+			    $('#page3 > a').text(page - 1);
+			    $('#page4 > a').text(page);
+			    $('#page5 > a').text(page + 1);
+			    $('#page4').addClass('active');
+            }
+            else if (page === total_page) {
+			    $('#lw_next').addClass('disabled');
+                $('#page1 > a').text(page - 4);
+			    $('#page2 > a').text(page - 3);
+			    $('#page3 > a').text(page - 2);
+			    $('#page4 > a').text(page - 1);
+                $('#page5 > a').text(page);
+			    $('#page5').addClass('active');
+            }
+            else {
+			    $('#page1 > a').text(page - 2);
+                $('#page2 > a').text(page - 1);
+                $('#page3 > a').text(page);
+                $('#page4 > a').text(page + 1);
+			    $('#page5 > a').text(page + 2);
+			    $('#page3').addClass('active');
+            }
+            for (var i = 1; i <= 5; i++) {
+			    $('#page' + i + ' > a').attr('href', uri.replace(/page=\d+/, 'page=' + $('#page' + i + ' > a').text()));
+            }
+            $('#lw_prev > a').attr('href',uri.replace(/page=\d+/,'page=' + (page - 1)));
+            $('#lw_next > a').attr('href',uri.replace(/page=\d+/,'page=' + (page + 1)));
+		});
+	</script>
+{% endblock %}

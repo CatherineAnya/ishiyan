@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/login-signup.css' %}">
+    <script type="text/javascript" src="{% static 'website/js/login-signup.js' %}"></script>
+{% endblock link %}
+
+{% block content %}
+    <div class="container lw_login-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-8 col-md-offset-2 lw_title">
+                    <div class="login" style="text-align: center;">登录</div>
+                </div>
+                <div class="col-md-4 col-md-offset-4 lw_login">
+                    <form id="lw_login-form" action="/login/" method="POST">
+                        {% csrf_token %}
+                        <div class="input-group lw_username">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="usr" type="text" name="usr" class="form-control" placeholder="请输入用户名">
+                        </div>
+                        <div class="input-group lw_password">
+                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                             <input id="pwd" type="password" name="pwd" class="form-control" placeholder="请输入密码">
+                        </div>
+                        <div class="form-group">
+                            <label for="remember" class="checkbox inline"></label>
+                            <input id="remember" name="remember" type="checkbox" value="y"> 下次自动登录
+                        </div>
+                        <div class="lw_submit">
+                            <input class="btn btn-primary lw_submitbtn" id="submit" name="submit" type="submit" value="进入爱实验">
+                        </div>
+                        <div id="lw_error" class="form-group lw_error-msg" style="display: none;">
+                            <div class="alert alert-danger" role="alert"></div>
+                        </div>
+                    </form>
+                    <div class="lw_login-footer">
+                        <span>
+                            <a href="">忘记密码？</a>
+                            <a href="/signup/">注册新账号</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'website/css/message.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container lw_message-layout">
+        <div class="row">
+            <div class="col-md-12 lw_message-layout-body">
+                <div class="content">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="javascript:;" aria-controls="labs" role="tab" data-toggle="tab">系统通知</a>
+                        </li>
+                    </ul>
+                    <div class="row lw_message-row">
+                        <div class="msg-panel sys-msg-list" id="sys-msg-list">
+                            {% for message in message_list %}
+                            <div class="lw_message-item">
+                                <div class="lw_message-top row">
+                                    <div class="lw_message-label">
+                                        <span class="label">{{ message.type }}</span>
+                                    </div>
+                                    <div class="lw_message-content">
+                                        <p>{{ message.message }}</p>
+                                    </div>
+                                </div>
+                                <div class="lw_message-bottom">
+                                    <div class="lw_message-create-time">
+                                        <small>{{ message.datetime }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

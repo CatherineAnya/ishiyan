@@ -1,0 +1,353 @@
+#lw_lab-console {
+    height: 100%;
+    overflow: hidden;
+}
+#lw_lab-console #lw_lab-container {
+    position: relative;
+    width: 36%;
+    height: 100%;
+    background: #f9f9f9;
+}
+#lw_lab-console .lw_lab-nav-container {
+    position: relative;
+    padding: 2px;
+    background: #000;
+}
+#lw_lab-console .lw_lab-nav-container .nav-tabs {
+    padding: 0;
+    margin: 0;
+    background: #2b2f36;
+    border: none;
+}
+#lw_lab-console .lw_lab-nav-container .nav-tabs li:first-child {
+    width: 20px;
+    padding: 0;
+    margin-right: 20px;
+}
+#lw_lab-console .lw_lab-nav-container .nav-tabs li {
+    width: 70px;
+    margin: 0 8px;
+    text-align: center;
+}
+#lw_lab-console .lw_lab-nav-container .nav-tabs li:first-child a {
+    padding: 4px;
+    font-size: 20px;
+    border: none;
+}
+#lw_lab-console .lw_lab-nav-container .nav-tabs li a {
+    padding: 8px 0;
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+}
+.nav-tabs > li > a {
+    margin: 0 48px 0 0;
+    padding: 0 0 4px;
+    color: #565a61;
+    background-color: transparent;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid transparent;
+}
+#lw_lab-console .lw_lab-nav-container .nav-tabs li.active, #lw_labdoc:hover, #lw_report:hover {
+    background-color: #00c894;
+}
+#lw_lab-console .lw_lab-nav-container .nav-tabs li {
+    width: 70px;
+    margin: 0 8px;
+    text-align: center;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .nav-tabs > li > a:focus, .nav-tabs > li > a:hover {
+    color: #4c5157;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+}
+#lw_ask > a:hover {
+    color: #00c894 !important;
+}
+#lw_ask {
+    margin-right: 20px !important;
+}
+#lw_lab-console #lw_lab-container .container {
+    max-width: 100%;
+    height: 800px;
+    background: #f9f9f9;
+    padding: 0;
+    box-shadow: 0 0 1px 1px #ddd;
+}
+#lw_lab-console #lw_lab-container .container .tab-pane {
+    height: 100%;
+}
+#labdoc {
+    position: relative;
+}
+.doc-reader {
+    height: 100%;
+}
+.single-page {
+    height: 100%;
+    padding: 20px 10px;
+    overflow-y: auto;
+}
+.markdown-body {
+    font-size: 16px;
+}
+.markdown-body h1,h2 {
+    padding: 5px;
+    width: 97.2%;
+    border-bottom: 1px solid #ddd;
+}
+.markdown-body > p,.markdown-body li,.markdown-body li > p,.markdown-body pre {
+    width: 97.2%;
+    line-height: 180%;
+}
+.markdown-body p img {
+    width: 60%;
+}
+.markdown-body blockquote {
+    color: #888;
+}
+.markdown-body hr {
+    display: none;
+}
+#lw_lab-console #display {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 64%;
+    height: 100%;
+    background: #000;
+}
+/* 报告 */
+#lw_lab-console #report {
+    background: #fff;
+}
+.mkeditor {
+    padding: 0;
+    border-radius: 4px;
+}
+.mkeditor .nav-tabs {
+    margin-bottom: 0;
+    border-bottom: 1px solid #ddd;
+}
+.nav-tabs {
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+#lw_lab-console #report .nav-tabs .btn.publish-report-btn, #lw_lab-console #report .nav-tabs .btn.update-report-btn, #lw_lab-console #report .nav-tabs div.publish-report-btn, #lw_lab-console #report .nav-tabs div.update-report-btn {
+    margin-right: 24px;
+}
+#lw_lab-console #report .nav-tabs .btn, #lw_lab-console #report .nav-tabs div {
+    margin: 3px;
+}
+.btn {
+    border-radius: 3px;
+}
+#lw_lab-console #report .nav-tabs .autosave-time {
+    color: #ccc;
+    padding: 7px;
+    font-size: 14px;
+}
+#lw_lab-console #report .nav-tabs .btn, #lw_lab-console #report .nav-tabs div {
+    margin: 3px;
+}
+.mkeditor-editor {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: 0;
+    outline: 0;
+}
+/* 显示隐藏桌面 */
+#lw_lab-console .desktop-toggle {
+    position: absolute;
+    top: 49px;
+    right: 0;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 110;
+}
+#lw_lab-console .desktop-toggle .hide-desktop {
+    display: inline-block;
+    width: 20px;
+    color: #eee;
+    background: #00c894;
+    margin: 0;
+    padding: 4px;
+    border-radius: 4px 0 0 4px;
+    line-height: 1.2em;
+    font-weight: 100;
+    font-size: 14px;
+}
+/* 工具栏 */
+#lw_lab-console #tools {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: rgba(85,85,85,0.4);
+    z-index: 100;
+}
+/* 显示隐藏工具栏 */
+#lw_lab-console #tools .tools-toggle {
+    position: absolute;
+    top: 130px;
+    left: -20px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 110;
+}
+#lw_lab-console #tools .tools-toggle .hide-tools {
+    display: block;
+    width: 20px;
+    color: #eee;
+    background: #4e5a60;
+    padding: 4px;
+    border-radius: 4px 0 0 4px;
+    line-height: 1.2em;
+    font-weight: 100;
+    font-size: 14px;
+}
+#lw_lab-console .lw_time {
+    padding: 0 8px 8px;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+}
+#lw_lab-console #tools .tools-divide {
+    width: 70%;
+    margin: 0 auto;
+    border-bottom: 1px solid #434a53;
+}
+#lw_lab-console #tools .vm-mode-select {
+    position: relative;
+}
+#lw_lab-console #tools .vm-mode-select > .btn {
+    padding: 14px 30px;
+}
+#lw_lab-console #tools .vm-mode-select > .btn, #lw_lab-console #tools > .btn, #lw_lab-console #tools > span .btn {
+    display: none;
+    padding: 10px 30px;
+    color: #eee;
+    background: none;
+    border: none;
+    border-radius: 0;
+    text-align: left;
+    outline: none;
+}
+#lw_lab-console #tools .vm-mode-select .vm-modes {
+    position: absolute;
+    top: 0;
+    min-width: 150px;
+    padding: 7px;
+    background: #616161;
+    white-space: nowrap;
+    transform: translateX(100%);
+    transition: all 1s ease;
+    z-index: 10;
+}
+#lw_lab-console #tools .vm-mode-select .vm-modes .btn.active, #lw_lab-console #tools .vm-mode-select .vm-modes .btn:focus,
+#lw_lab-console #tools .vm-mode-select .vm-modes .btn:hover {
+    background: #434a53;
+    border-radius: 40px;
+}
+#lw_lab-console #tools .vm-mode-select .vm-modes .btn {
+    display: inline-block;
+    margin: 0 4px;
+    color: #fff;
+}
+#lw_lab-console #tools .vm-mode-select .show-modes {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    height: 80%;
+    padding: 0 0 0 2px;
+    color: #fff;
+    background: #777;
+    line-height: 250%;
+    z-index: 1;
+}
+#lw_lab-console #tools > .btn.next-lab-btn {
+    width: 75%;
+    margin: 10px auto;
+    padding: 4px 10px;
+    color: #ddd;
+    background: #00c894;
+    border-radius: 40px;
+    text-align: center;
+}
+#lw_lab-console #tools > .btn.stop-lab-btn {
+    width: 75%;
+    margin: 10px auto;
+    padding: 4px 10px;
+    color: #ddd;
+    background: #ff5c5d;
+    border-radius: 40px;
+    text-align: center;
+}
+#lw_lab-console #tools > .btn.next-lab-btn:hover, #lw_lab-console #tools > .btn.stop-lab-btn:hover {
+    color: #fff;
+}
+#lw_lab-console #tools .vm-mode-select > .btn, #lw_lab-console #tools > .btn, #lw_lab-console #tools > span .btn {
+    display: none;
+    padding: 10px 30px;
+    color: #eee;
+    background: none;
+    border: none;
+    border-radius: 0;
+    text-align: left;
+    outline: none;
+}
+#lw_lab-console #tools > span .btn:hover {
+    background-color: #616161;
+    color: #00c894;
+}
+#lw_lab-console #tools .vm-mode-select > .btn:last-child, #lw_lab-console #tools > .btn:last-child,
+#lw_lab-console #tools > span .btn:last-child {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    padding: 5px 10px;
+    font-size: 25px;
+    color: #777;
+}
+#lw_lab-console #tools .vm-mode-select > .btn:last-child:hover, #lw_lab-console #tools > .btn:last-child:hover,
+#lw_lab-console #tools > span .btn:last-child:hover {
+    color: #fff;
+}
+/* 共享桌面 */
+.modal-dialog {
+    width: 768px;
+    margin: 80px auto;
+}
+.modal-content {
+    border-radius: 4px;
+    padding: 20px;
+}
+.modal-header {
+    color: #4c5157;
+    border-bottom: 2px solid rgba(0,0,0,.2);
+    overflow: hidden;
+}
+.modal-header h3, .modal-header h4 {
+    margin: 0;
+    font-weight: 700;
+    color: #4c5157;
+}
+.modal-body {
+    padding: 30px 15px;
+    font-size: 16px;
+}
+.modal .modal-body > div {
+    margin-bottom: 15px;
+}
+#share-desktop-modal input {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.modal-footer {
+    margin-top: 30px;
+}

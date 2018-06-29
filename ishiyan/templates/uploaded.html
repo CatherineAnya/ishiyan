@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'website/css/homepage.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container lw_homepage-layout">
+        <div class="row">
+            <div class="col-md-12 lw_homepage-layout-body">
+                <div class="lw_userinfo-banner container">
+                    <div class="lw_banner-container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-left lw_userinfo-banner-avatar">
+                                    <div class="user-avatar ">
+                                        <a class="avatar" href="/homepage/" target="_blank">
+                                            <img src="{% static 'website/img/avatar.jpg' %}" title="{{ user.username }}">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="pull-left lw_userinfo-banner-details">
+                                    <div class="lw_userinfo-banner-meta">
+                                        <span class="username">{{ user.username }}</span>
+                                        <div class="edit-info">
+                                            <a href="/profile/" class="edit-profile">
+                                                <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="lw_userinfo-banner-status">
+                                        <span>{{ user.status }}</span>
+                                        <span>{{ user.job_or_school }}</span>
+                                    </div>
+                                    <span class="join-date">{{ user.date }} 加入爱实验</span>
+                                </div>
+                                <div class="pull-right lw_userinfo-banner-time">
+                                    <div class="userinfo-time-wall">
+                                        <div class="user-count">
+                                        	<img class="count-img" src="https://static.shiyanlou.com/img/user/icon_lab.png" alt="累计实验">
+                                            <span class="info-text">累计实验 16 次</span>
+                                        </div>
+                                        <div class="user-time-get">
+                                        	<img class="time-img" src="https://static.shiyanlou.com/img/user/icon_time.png" alt="实验时间">
+                                            <span class="info-text">有效学习时间 408 分钟</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container lw_homepage-courses">
+                	<div class="row">
+                		<div class="col-md-12 lw_homepage-layout-body">
+                			<div class="content" role="tabpanel">
+                                <ul class="nav nav-tabs" rolw="tablist">
+                                    <li role="presentation">
+                                        <a href="/homepage/{{ user.uid }}" role="tab">课程</a>
+                                    </li>
+                                    <li role="presentation" class="active">
+                                        <a href="/uploaded/" role="tab">已传课程</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a href="javascript:;">
+                                                    <span class="label">历史上传(<span id="latest-learn-num" class="latest-learn-num">{{ upload_count }}</span>)</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p id="lw_uploaded-text">目前还没有上传过课程哦！</p>
+                                        {% for uploaded_course in uploaded_course_list %}
+                                        <section class="lw_courses-list-wrapper">
+                                        	<div class="lw_courses-list-item">
+                                        		<div class="row">
+                                                    <div class="lw_course-img col-md-4">
+                                                        <a href="/course/{{ uploaded_course.course.cid }}" title="{{ uploaded_course.course.name }}">
+                                                            <img alt="{{ uploaded_course.course.name }}" src="{% static 'website/img/course/' %}{{ uploaded_course.course.image }}">
+                                                        </a>
+                                                    </div>
+                                                    <div class="lw_course-detail col-md-8">
+                                                        <p class="lw_course-name">
+                                                            <a href="/course/{{ uploaded_course.course.cid }}">{{ uploaded_course.course.name }}</a>
+                                                            <span role="button" href="javascript:;" id="action-more" class="action-more pull-right">
+                                                                更多
+                                                            </span>
+                                                            <a type="button" id="lw_delete-btn" class="btn btn-default btn-sm btn-action lw_delete-btn" data-toggle="modal" data-target="#course-action-modal">删除记录</a>
+                                                        </p>
+                                                        <p class="lw_course-relate-data">
+                                                            <a href="/course/{{ uploaded_course.course.cid }}" class="btn btn-primary pull-right">开始实验</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                		</div>
+                	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script%}
+    <script type="text/javascript">
+		$(function () {
+			$('#action-more').click(function () {
+				$('#lw_delete-btn').toggle('slow');
+			});
+
+			var count = $('#latest-learn-num').text();
+
+			if (count == 0) {
+			    $('#lw_uploaded-text').show();
+            }
+            else {
+			    $('#lw_uploaded-text').hide();
+            }
+		});
+	</script>
+{% endblock %}

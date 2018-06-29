@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'website/css/setting.css' %}">
+    <script type="text/javascript" src="{% static 'website/js/profile-account.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container lw_setting-layout">
+        <div class="row">
+            <div class="col-md-12 lw_setting-layout-body">
+                <div class="clearfix profile-tab-content" id="profile-container">
+                    <div class="lw_setting-pro-body">
+                        <div class="col-md-3">
+                            <div class="tab-content content">
+                                <div role="tabpanel" class="tab-pane active">
+                                    <div class="panel-content">
+                                        <div class="lw_setting-profile-menu">
+                                            <a class="menu-item" href="/profile/">
+                                                基本信息
+                                            </a>
+                                            <a class="menu-item menu-active" href="/account/">
+                                                账号密码
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9 lw_setting-profile-content">
+                            <div class="content">
+                            	<form id="lw_account-form" class="form-horizontal" method="POST" action="/account/">
+                                    {% csrf_token %}
+                            		<div class="form-group">
+                            			<label class="col-xs-3 col-sm-3 control-label" for="phone">手机</label>
+                            			<span class="col-xs-8 col-sm-5 edit-phone-component">
+                                            <span class="user-phone" style="font-size: 16px; color: #565656;">{{ user.phone }}</span>
+                                            <a href="javascript:;" id="click-to-phone" class="bind-phone edit-user-phone click-to-change" style="padding: 0;">点击修改</a>
+                                        </span>
+                                        <div class="col-sm-3" id="phone" style="display: none;">
+                                            <input type="tel" name="telephone" value="{{ user.phone }}" class="form-control" placeholder="输入新手机号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-3 col-sm-3 control-label" for="email">邮箱</label>
+                                        <span class="col-xs-8 col-sm-5 edit-email-component">
+                                            <span class="user-email encrypted-content-email">{{ user.email }}</span>
+                                            <a href="#modal-modify-email" id="click-to-email" class="edit-user-email click-to-change">点击修改</a>
+                                        </span>
+                                        <div class="col-sm-4" id="email" style="display: none;">
+                                            <input type="email" name="email" value="{{ user.email }}" class="form-control" placeholder="请输入新邮箱">
+                                        </div>
+                                    </div>
+                                    <div class="form-group modify-pwd">
+                                        <label class="col-xs-3 col-sm-3 control-label label-origin-pwd" for="password">密码</label>
+                                        <span class="col-xs-8 col-sm-5 edit-pwd-component">
+                                            <span class="user-pwd">******</span>
+                                            <a href="javascript:;" id="click-to-pwd" class="edit-user-pwd click-to-change">点击修改</a>
+                                        </span>
+                                        <div class="col-sm-4" id="password" style="display: none;">
+                                            <input type="text" name="old-password" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div id="new-pwd" class="form-group new-pwd" style="display: none;">
+                                        <label class="col-sm-3 control-label" for="new-pwd">新密码</label>
+                                        <div class="col-sm-4" id="new-pwd">
+                                            <input type="text" name="new-password" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"></label>
+                                        <div class="col-sm-4">
+                                            <input class="btn btn-primary" id="account-submit" name="submit" type="submit" value="保存">
+                                        </div>
+                                    </div>
+                                    <div id="lw_account-success" class="form-group lw_success-msg" style="display: none;">
+                                        <div class="alert alert-success" role="alert"></div>
+                                    </div>
+                                    <div id="lw_account-error" class="form-group lw_error-msg" style="display: none;">
+                                        <div class="alert alert-danger" role="alert"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script%}
+    <script type="text/javascript">
+		$(function () {
+            $('#click-to-phone').click(function () {
+                $('.edit-phone-component').hide();
+                $('#phone').show();
+            });
+            $('#click-to-email').click(function () {
+                $('.edit-email-component').hide();
+                $('#email').show();
+            });
+            $('#click-to-pwd').click(function () {
+                $('.label-origin-pwd').text('原密码');
+                $('.edit-pwd-component').hide();
+                $('#password').show();
+                $('#new-pwd').show();
+            });
+		});
+	</script>
+{% endblock %}

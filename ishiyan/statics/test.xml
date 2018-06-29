@@ -1,0 +1,2 @@
+<user-mapping>
+<authorize password="5901" username="5901"><protocol>vnc</protocol><param name="hostname">localhost</param><param name="port">5901</param><param name="password">likexin</param></authorize></user-mapping>

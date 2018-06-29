@@ -1,0 +1,59 @@
+body {
+	background-color: #f8fafc;
+}
+.lw_publish-container {
+	margin-top: 47px;
+	background-color: #fff;
+	border: 1px solid #F9F9F9;
+	box-shadow: 0 0 15px #494949;
+	margin-bottom: 6px;
+}
+.lw_title {
+	margin-top: 20px;
+	padding: 5px;
+	border-bottom: 2px solid #f8faf8;
+	color: #525252;
+	font-size: 20px;
+}
+.lw_publish {
+	margin-top: 30px;
+}
+.form-horizontal .control-label {
+    width: 100px;
+}
+.form-horizontal label {
+    font-size: 16px;
+    color: #4e5357;
+    margin: 0;
+}
+.form-group label {
+    display: block;
+}
+.mkeditor {
+    padding: 0;
+    border-radius: 4px;
+}
+.mkeditor-editor {
+    background: #fff;
+    border-top: 0;
+    outline: 0;
+}
+.q-types {
+	margin-top: 2px;
+	border: none;
+	box-shadow: none;
+}
+.q-types .question-type {
+	margin-right: 3px;
+}
+.form-group {
+	color: #999;
+}
+.lw_submit {
+	margin: 25px 0;
+	text-align: center;
+}
+.lw_submitbtn:hover {
+	background-color: #00c894;
+	border-color: #00a075;
+}

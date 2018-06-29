@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <style>
+        body {
+            background-color: #f8fafc;
+        }
+        .lw_view-document-container {
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            background-color: #fff;
+        }
+        .lw_view-document-row {
+            height: 50px;
+        }
+        .lw_view-document-row > div {
+            margin-top: 15px;
+        }
+        .labdoc-header a {
+            color: #666;
+            font-size: 15px;
+            text-decoration: none;
+            padding-left: 15px;
+        }
+        .labdoc-header a.lw_cname {
+            padding-left: 15px;
+        }
+        .labdoc-header a.lw_labstart {
+            padding-right: 15px;
+        }
+        .labdoc-header a:hover {
+            color: #00c894;
+        }
+        .labdoc-nav-content {
+            font-size: 16px;
+        }
+        .labdoc-nav-content h1,h2 {
+            padding: 5px;
+            width: 97.2%;
+            border-bottom: 1px solid #ddd;
+        }
+        .labdoc-nav-content > p,.labdoc-nav-content li,.labdoc-nav-content li > p,.labdoc-nav-content pre {
+            width: 97.2%;
+            line-height: 180%;
+        }
+        .labdoc-nav-content p img {
+            width: 60%;
+        }
+        .labdoc-nav-content blockquote {
+            color: #888;
+        }
+        .labdoc-nav-content hr {
+            display: none;
+        }
+        .labdoc-footer a {
+            text-decoration: none;
+            padding-right: 15px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="lw_view-document-layout">
+        <div class="container lw_view-document-container">
+            <div class="row lw_view-document-row" style="border-bottom: 2px solid #ccc;">
+                <div class="labdoc-header">
+                    <a href="/course/{{ lab.course.cid }}" class="lw_cname">
+                        <i class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></i>
+                          {{ lab.course.name }}
+                    </a>
+                    <a href="#delay-desktop-modal" class="lw_labstart pull-right">
+                        <i class="glyphicon glyphicon-play" aria-hidden="true"></i>
+                          开始实验
+                    </a>
+                </div>
+            </div>
+            <div class="container">
+                <div class="labdoc-nav">
+                    <div class="labdoc-nav-content">
+                        {% autoescape off %}
+                        {{ content }}
+                        {% endautoescape %}
+                    </div>
+                </div>
+            </div>
+            <div class="row lw_view-document-row" style="border-top: 2px solid #ccc;">
+                <div class="labdoc-footer">
+                    <a class="pull-right labdoc-page" href="/courses/57/document/281/document">
+                        下一节：开发环境和剖析第一个 C 语言
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade in" id="delay-desktop-modal" tabindex="-1" role="dialog" style="display: none; padding-left: 0px; background-color: rgba(0,0,0,0.98);">
+        <div class="modal-dialog" role="document">
+            <p style="color: #fff; text-align: center; margin-top: 400px;">爱实验正在加载，请稍后。。。</p>
+            <div class="progress">
+                <div id="lw_delay-progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        $(function () {
+           $('.lw_labstart').click(function () {
+               var href = '/course/{{ lab.course.cid }}/startlab/{{ lab.did }}';
+               delayAll(href);
+           });
+
+           function delayAll(href) {
+               $('#delay-desktop-modal').css('display','block');
+               var valuenow = 0;
+               var widthnow = 0;
+               // 延时加载
+               $.get('/check_login/',function (responseText) {
+                   if (responseText.login) {
+                       valuenow = 100;
+                       widthnow = 100;
+                       $('#lw_delay-progress').attr('aria-valuenow', valuenow);
+                       $('#lw_delay-progress').css('width', widthnow + '%');
+                       window.location.href = href;
+                   }
+               });
+               function delay() {
+                   $('#lw_delay-progress').attr('aria-valuenow', valuenow);
+                   $('#lw_delay-progress').css('width', widthnow + '%');
+                   valuenow += 1;
+                   widthnow += 1;
+                   if (valuenow <= 100) {
+                       setTimeout(delay,100);
+                   }
+               }
+               delay();
+           }
+        });
+    </script>
+{% endblock %}

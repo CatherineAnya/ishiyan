@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'website/css/upload.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container lw_upload-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-8 col-md-offset-2 lw_title">
+                    <div class="signup" style="text-align: center;">上传课程</div>
+                </div>
+                <div class="col-md-4 col-md-offset-4 lw_upload">
+                    <form id="lw_upload-form" action="/upload/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div id="lw_upload-course-name" class="input-group lw_upload-course-name">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+                            <input id="course-name" type="text" name="course-name" class="form-control" placeholder="请输入要上传的课程名称">
+                        </div>
+                        <div id="lw_upload-course-label" class="input-group lw_upload-course-label">
+                             <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                             <input id="course-label" type="text" name="course-label" class="form-control" placeholder="请输入要上传的课程所属标签">
+                        </div>
+                        <div id="lw_upload-course-description" class="input-group lw_upload-course-description">
+                             <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                             <input id="course-description" type="text" name="course-description" class="form-control" placeholder="请输入要上传的课程简介">
+                        </div>
+                        <p>请选择要上传的课程图片：</p>
+                        <div id="lw_upload-course-pic" class="input-group lw_upload-course-pic">
+                             <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+                             <input id="course-pic" type="file" name="course-pic" class="form-control" accept="image/*">
+                        </div>
+                        <p>请选择要上传的课程文档：</p>
+                        <div id="lw_upload-course-labs" class="input-group lw_upload-course-labs">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                            <input id="course-labs" name="course-labs" type="file" class="form-control" multiple>
+                        </div>
+                        <div class="lw_submit">
+                            <input class="btn btn-primary lw_uploadbtn" id="upload-submit" name="upload" type="submit" value="上传">
+                        </div>
+                        {% if success is not None %}
+                            {% if not success %}
+                            <div id="lw_upload-error" class="form-group lw_error-msg">
+                                <div class="alert alert-danger" role="alert">{{ message }}</div>
+                            </div>
+                            {% else %}
+                            <div id="lw_upload-success" class="form-group lw_success-msg">
+                                <div class="alert alert-success" role="alert">{{ message }}</div>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

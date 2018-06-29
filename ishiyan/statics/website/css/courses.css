@@ -1,0 +1,89 @@
+body {
+    background-color: #f8fafc;
+}
+/* label */
+.lw_all-content {
+    position: relative;
+    padding: 20px;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #eee;
+    font-size: 16px;
+    color: #666;
+}
+.lw_all-label-title {
+    padding: 0;
+    width: 70px;
+    text-align: center;
+    font-size: 18px;
+}
+.lw_all-label-tag a.lw_label-padding {
+    display: inline-block;
+    margin: 0 4px 10px 0;
+    padding: 4px 10px;
+    font-size: 15px;
+    color: #666;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.lw_all-label-tag a.lw_label-padding:hover {
+    background-color: #7689e5;
+    color: #fff;
+}
+.lw_all-label-tag .lw_active {
+    background-color: #7689e5;
+    color: #fff !important;
+}
+/* courses */
+.lw_all-courses {
+    margin-top: 15px !important;
+}
+.lw_all-courses-img > img {
+    width: 267.5px;
+    height: 150px;
+}
+.lw_all-courses-course .lw_all-courses-box {
+    display: block;
+    width: 267.5px;
+    position: relative;
+    margin: 0;
+    background: #fff;
+    box-shadow: 0 2px 2px 0 #eee;
+    text-decoration: none;
+}
+.lw_all-courses-body {
+    position: relative;
+    bottom: 0;
+    background: #fff;
+    width: 267.5px;
+    height: 60px;
+}
+.lw_all-courses-name {
+    display: block;
+    width: 100%;
+    padding: 20px 10px 0;
+    color: #666;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.lw_all-courses-desc {
+    height: 0;
+    bottom: 0;
+    padding: 0 10px;
+    margin-top: 10px;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+/* 分页 */
+.lw_paging {
+    text-align: center;
+    clear: both;
+}

@@ -1,0 +1,146 @@
+body {
+	background-color: #f8fafc;
+}
+/* profile */
+.lw_setting-layout {
+	min-height: 100%;
+    margin-top: 25px;
+}
+.lw_setting-layout-body {
+	padding: 0 5px;
+}
+.lw_setting-pro-body {
+	display: inline-block;
+    width: 100%;
+}
+.lw_setting-pro-body > .col-md-3 {
+    padding: 0 20px;
+}
+.lw_setting-pro-body > .col-md-3 .tab-content {
+    padding-top: 39px;
+    min-height: 200px;
+}
+.content {
+    position: relative;
+    padding: 30px 30px 60px 30px;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+.lw_setting-profile-menu {
+    text-align: center;
+}
+.lw_setting-profile-menu .menu-item.menu-active {
+    background: #efefef;
+    text-decoration: none;
+}
+.lw_setting-profile-menu .menu-item {
+    display: inline-block;
+    width: 124px;
+    height: 35px;
+    line-height: 35px;
+    vertical-align: middle;
+    border-radius: 28px;
+    font-size: 16px;
+    color: #565656;
+    letter-spacing: 0;
+    margin-bottom: 39px;
+    text-decoration: none;
+}
+.lw_setting-pro-body > .col-md-9 {
+    padding: 0;
+    margin-left: -10px;
+}
+.lw_setting-pro-body > .col-md-9 .content {
+    padding: 44px 50px;
+    min-height: 500px;
+}
+.change-header-img, .profile-info {
+	display: flex;
+    align-items: center;
+}
+.change-header-img .control-label {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+}
+.change-header-img #pickfiles {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+}
+.change-header-img #pickfiles img {
+    width: 125px;
+    height: 125px;
+}
+.user-img {
+    border-radius: 25px;
+    vertical-align: -5px;
+}
+.change-header-img #pickfiles div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 4px 0;
+    color: #fff;
+    background: rgba(0,0,0,.7);
+    font-size: 14px;
+    text-align: center;
+}
+.lw_setting-pro-body .control-label {
+	width: 110px;
+    padding-right: 0;
+    font-size: 16px;
+    color: #565656;
+    font-weight: 500;
+    text-align: left;
+}
+form .help-block {
+    color: #d9534f;
+}
+#job_stat_code {
+    margin: 0;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+}
+#job_stat_code li {
+    float: left;
+    margin-right: 40px;
+    list-style-type: none;
+}
+#profile-container .radio label {
+    font-size: 14px;
+}
+#job_stat_code li label {
+    padding: 0;
+    display: inline-block;
+}
+.lw_setting-pro-body #submit {
+    width: auto;
+}
+/* account */
+form .edit-phone-component,form .edit-email-component,form .edit-pwd-component {
+    display: inline-block;
+    padding: 7px 0 0 15px;
+}
+form .click-to-change {
+	display: inline-block;
+	float: right;
+    font-size: 16px;
+    color: #4990e2;
+    letter-spacing: 0;
+    text-decoration: none;
+}
+.user-email {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+}
+.user-pwd {
+	font-size: 16px;
+}

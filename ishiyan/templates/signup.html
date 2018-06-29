@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/login-signup.css' %}">
+    <script type="text/javascript" src="{% static 'website/js/login-signup.js' %}"></script>
+{% endblock link %}
+
+{% block content %}
+    <div class="container lw_signup-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-8 col-md-offset-2 lw_title">
+                    <div class="signup" style="text-align: center;">注册</div>
+                </div>
+                <div class="col-md-4 col-md-offset-4 lw_signup">
+                    <form id="lw_signup-form" action="/signup/" method="POST">
+                        {% csrf_token %}
+                        <div id="lw_usr" class="input-group lw_usr">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="usr" type="text" name="usr" class="form-control" placeholder="请输入用户名">
+                        </div>
+                        <div id="lw_usr-point" style="color: red; display: none;">用户名可以为字母、数字、字符等</div>
+                        <div id="lw_pwd" class="input-group lw_pwd">
+                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                             <input id="pwd" type="password" name="pwd" class="form-control" placeholder="请输入密码">
+                        </div>
+                        <div id="lw_pwd-point" style="color: red; display: none;">密码至少为6位数字或字母</div>
+                        <div id="lw_email" class="input-group lw_email">
+                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                             <input id="email" type="email" name="email" class="form-control" placeholder="请输入邮箱">
+                        </div>
+                        <div id="lw_email-point" style="color: red; display: none;">请输入有效邮箱</div>
+                        <span id="lw_verify-btn" class="btn btn-link" style="float: right; padding: 5px 0 5px 2px; text-decoration: none;">点击获取验证码</span>
+                        <div id="lw_verify" class="input-group lw_verify">
+                             <span class="input-group-addon"><i class="glyphicon glyphicon-qrcode"></i></span>
+                             <input id="verify" type="text" name="verify" class="form-control" placeholder="请输入邮箱验证码">
+                        </div>
+                        <div id="lw_verify-point" style="color: red; display: none;">邮箱不能为空</div>
+                        <div id="lw_phone" class="input-group lw_phone">
+                             <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                             <input i d="phone" type="tel" name="phone" class="form-control" placeholder="请输入手机号码">
+                        </div>
+                        <div id="lw_tel-point" style="color: red; display: none;">请输入11位有效手机号码</div>
+                        <div class="form-group">
+                            <label for="isAgree" class="checkbox inline"></label>
+                            <input id="isAgree" name="isAgree" type="checkbox" value="y"> 是否同意爱实验隐私协议
+                        </div>
+                        <div class="lw_submit">
+                            <input class="btn btn-primary lw_submitbtn" id="signup-submit" name="submit" type="submit" value="注册">
+                        </div>
+                        <div id="lw_signup-error" class="form-group lw_error-msg" style="display: none;">
+                            <div class="alert alert-danger" role="alert"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(function () {
+            // 验证邮箱
+            $('#lw_verify-btn').click(function () {
+                if ($('#email').val() !== '') {
+                    var email = $('#email').val();
+                    $.get('/send_mail/', {
+                        email: email
+                    });
+                    var second = 60;
+
+                    function countdown() {
+                        $('#lw_verify-btn').text('请等待' + second + '秒');
+                        $('#lw_verify-btn').attr('disabled', true);
+                        second--;
+                        if (second === 0) {
+                            $('#lw_verify-btn').text('点击获取验证码');
+                            $('#lw_verify-btn').attr('disabled', false);
+                        } else {
+                            setTimeout(countdown, 1000);
+                        }
+                    }
+                    countdown();
+                }
+                else {
+                    $('#lw_verify').css('margin-bottom','0');
+                    $('#lw_verify-point').show();
+                }
+            });
+        });
+    </script>
+{% endblock %}

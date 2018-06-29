@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'website/css/setting.css' %}">
+    <script type="text/javascript" src="{% static 'website/js/profile-account.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container lw_setting-layout">
+        <div class="row">
+            <div class="col-md-12 lw_setting-layout-body">
+                <div class="clearfix profile-tab-content" id="profile-container">
+                    <div class="lw_setting-pro-body">
+                        <div class="col-md-3">
+                            <div class="tab-content content">
+                                <div role="tabpanel" class="tab-pane active">
+                                    <div class="panel-content">
+                                        <div class="lw_setting-profile-menu">
+                                            <a class="menu-item menu-active" href="/profile/">
+                                                基本信息
+                                            </a>
+                                            <a class="menu-item" href="/account/">
+                                                账号密码
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9 lw_setting-profile-content">
+                            <div class="form-horizontal content">
+                                <div class="form-horizontal">
+                                    <div class="form-group change-header-img">
+                                        <label class="col-sm-3 control-label">头像</label>
+                                        <div class="col-sm-4">
+                                            <a id="pickfiles" style="z-index: 1;">
+                                                <img id="user-img" class="user-img" src="{% static 'website/img/avatar.jpg' %}">
+                                                <div id="head" style="display: none;">修改头像</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <form id="lw_profile-form" class="form-horizontal" method="POST" action="/profile/">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="name">昵称</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" id="name" name="name" type="text" value="{{ user.username }}">
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="job_stat_code">我的状态</label>
+                                            <div class="col-sm-4 radio">
+                                                <ul id="job_stat_code">
+                                                	<li>
+                                                		<input checked id="job_stat_code-0" name="job_stat_code" type="radio" value="在上学">
+                                                		<label for="job_stat_code-0">在上学</label>
+                                                	</li>
+                                                	<li>
+                                                		<input id="job_stat_code-1" name="job_stat_code" type="radio" value="在工作">
+                                                		<label for="job_stat_code-1">在工作</label>
+                                                	</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div id="lw_school" class="form-group">
+                                            <label class="col-sm-3 control-label" for="school">我的学校</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" id="school" name="school" type="text">
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div id="lw_job" class="form-group" style="display: none;">
+                                            <label class="col-sm-3 control-label" for="job">职位</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control" id="job" name="job">
+                                                	<option selected value="请选择">请选择</option>
+                                                	<option value="Linux研发工程师">Linux研发工程师</option>
+                                                	<option value="前端工程师">前端工程师</option>
+                                                	<option value="Android工程师">Android工程师</option>
+                                                	<option value="运维工程师">运维工程师</option>
+                                                	<option value="测试工程师">测试工程师</option>
+                                                	<option value="DBA工程师">DBA工程师</option>
+                                                	<option value="产品经理">产品经理</option>
+                                                	<option value="硬件开发工程师">硬件开发工程师</option>
+                                                	<option value="Python研发工程师">Python研发工程师</option>
+                                                	<option value="PHP研发工程师">PHP研发工程师</option>
+                                                	<option value="JAVA研发工程师">JAVA研发工程师</option>
+                                                	<option value="Ruby研发工程师">Ruby研发工程师</option>
+                                                	<option value="iOS研发工程师">iOS研发工程师</option>
+                                                	<option value="教师">教师</option>
+                                                	<option value="其他">其他</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label"></label>
+                                            <div class="col-sm-4">
+                                                <input class="btn btn-primary" id="profile-submit" name="submit" type="submit" value="保存">
+                                            </div>
+                                        </div>
+                                        <div id="lw_profile-success" class="form-group lw_success-msg" style="display: none;">
+                                            <div class="alert alert-success" role="alert"></div>
+                                        </div>
+                                        <div id="lw_profile-error" class="form-group lw_error-msg" style="display: none;">
+                                            <div class="alert alert-danger" role="alert"></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script%}
+    <script type="text/javascript">
+		$(function () {
+			$('#pickfiles').hover(function () {
+				$('#head').slideDown();
+			},function () {
+				$('#head').slideUp();
+			});
+			$('#job_stat_code-0').click(function () {
+				$('#lw_school').show();
+				$('#lw_job').hide();
+			});
+			$('#job_stat_code-1').click(function () {
+				$('#lw_school').hide();
+				$('#lw_job').show();
+			});
+		});
+	</script>
+{% endblock %}

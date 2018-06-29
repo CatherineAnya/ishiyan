@@ -1,0 +1,382 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>爱实验 - {{ title }}</title>
+
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'website/css/startlab.css' %}">
+
+    <script type="text/javascript" src="{% static 'website/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'website/js/jquery.form.js' %}"></script>
+    <script type="text/javascript" src="{% static 'website/js/submit_report.js' %}"></script>
+
+    <link type="text/css" rel="stylesheet" href="{% static 'website/editor.md-master/css/editormd.css' %}">
+    <script type="text/javascript" src="{% static 'website/editor.md-master/editormd.js' %}"></script>
+</head>
+<body>
+    <div id="lw_lab-console">
+        <div id="lw_lab-container">
+            <div class="desktop-toggle" style="display: block;">
+                <span id="hide-desktop" class="hide-desktop">隐藏桌面</span>
+            </div>
+            <div class="lw_lab-nav-container">
+                <div class="tabs-hover"></div>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li>
+                        <a class="btn btn-primary" href="/course/{{ lab.course.cid }}" title="返回课程">
+                            <i class="glyphicon glyphicon-circle-arrow-left"></i>
+                        </a>
+                    </li>
+                    <li id="lw_labdoc" role="presentation" class="active">
+                        <a href="#labdoc" class="stat-event" data-stat="console_doc" aria-controls="labdoc" role="tab" data-toggle="tab">实验文档</a>
+                    </li>
+                    <li id="lw_report" role="presentation">
+                        <a href="#report" class="stat-event" data-stat="console_report" aria-controls="report" role="tab" data-toggle="tab">实验报告</a>
+                    </li>
+                    <li id="lw_ask" class="pull-right">
+                        <a href="/publish/" class="btn btn-primary" target="_blank">
+                            <i class="glyphicon glyphicon-question-sign"></i> 我要提问
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container">
+                <div role="tabpanel" class="tab-pane active" id="labdoc">
+                    <div class="doc-reader">
+                        <div class="single-page">
+                            <div class="markdown-body">
+                                {% autoescape off %}
+                                {{ content }}
+                                {% endautoescape %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane active" id="report" style="display: none;">
+                    <form id="lw_save-form" method="post" action="/submit_report/">
+                        {% csrf_token %}
+                        <input type="text" name="cid" value="{{ lab.course.cid }}" hidden>
+                        <input type="text" name="did" value="{{ lab.did }}" hidden>
+                        <div class="tabpanel mkeditor">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <input id="submit" type="submit" name="submit" value="保存" class="btn btn-primary pull-right publish-report-btn">
+                                <div id="autosave-time" class="pull-right autosave-time"></div>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="test-editormd">
+                                    <textarea style="display:none;" id="ts">{{ report_content }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="desktop">
+            <div id="display">
+                <iframe src="http://120.78.157.247:8080/guacamole/?username={{ port }}&password={{ port }}" frameborder="0" width="100%" scrolling="no" height="100%"></iframe>
+            </div>
+        </div>
+        <div id="tools" style="right: 0px;">
+            <div class="tools-toggle">
+                <span id="hide-tools" class="hide-tools" style="display: inline-block;">隐藏工具栏</span>
+            </div>
+            <div id="lw_time" class="lw_time">
+                <span></span>
+            </div>
+            <div class="tools-divide"></div>
+            <div class="vm-mode-select">
+                <a class="btn btn-defualt" style="display: block;">
+                    <i class="glyphicon glyphicon-random"></i> 切换界面
+                </a>
+                <div class="vm-modes">
+                    <a data-stat="conosle_mode" data-mode="desktop" class="btn stat-event active">
+                        <i class="fa fa=desktop"></i> 图形界面
+                    </a>
+                    <a data-stat="conosle_mode" data-mode="ssh" class="btn stat-event">
+                        <i class="fa fa=terminal"></i> 字符界面
+                    </a>
+                </div>
+                <a class="show-modes">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                </a>
+            </div>
+            <div class="tools-divide"></div>
+            <a id="stop-desktop-btn" href="#stop-desktop-modal" class="stop-lab-btn btn btn-default" data-toggle="modal" style="display: block;">
+                <i class="glyphicon glyphicon-stop"></i> 停止实验
+            </a>
+            <a id="next-lab-btn" href="/course/{{ lab.course.cid }}/startlab/{{ next_lab_id }}" class="next-lab-btn btn btn-default" data-toggle="modal" style="display: none;">
+                <i class="glyphicon glyphicon-step-forward"></i> 下个实验
+            </a>
+            <div class="tools-divide"></div>
+            <span id="tools-vmtools" style="display:inline-block;">
+                <a id="share-desktop-btn" href="#share-desktop-modal" class="share-desktop-btn btn btn-default" data-toggle="modal" style="display: block;">
+                    <i class="glyphicon glyphicon-share"></i> 共享桌面
+                </a>
+                <a id="download-desktop-btn" href="#download-code-modal" class="download-code-btn btn btn-default" data-toggle="modal" style="display: block;">
+                    <i class="glyphicon glyphicon-download-alt"></i> 下载代码
+                </a>
+                <a id="fullscreen-btn" href="#" data-stat="console_fullscreen" class="stat-event btn btn-default fullscreen-btn" style="display: block;">
+                    <i class="glyphicon glyphicon-fullscreen"></i> 桌面全屏
+                </a>
+                <span></span>
+            </span>
+            <a href="/discuss/" target="_blank" class="btn btn-default faq-btn">
+                <i class="glyphicon glyphicon-question-sign"></i>
+            </a>
+        </div>
+    </div>
+    <div class="modal fade in" id="share-desktop-modal" tabindex="-1" role="dialog" style="display: none; padding-left: 0px; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="lw_close_1" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">共享桌面</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h3>只读模式</h3>
+                        <p>复制以下链接发给朋友，让他围观您的桌面操作</p>
+                        <input id="readonly-share-url" type="text" class="form-control readonly" readonly="" value="http://www.wonter.net/readonly/?t={{ t }}">
+                        <div id="readonly-share-alert" class="alert alert-info" role="alert" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <h3>协作模式</h3>
+                        <p>复制以下链接发给朋友，邀请他远程协助，与您共同完成实验任务</p>
+                        <input id="cooperation-share-url" type="text" class="form-control cooperation" readonly="" value="http://www.wonter.net/cooperation/?t={{ t }}">
+                        <div id="cooperation-share-alert" class="alert alert-info" role="alert" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="lw_close_2" class="btn btn-default" type="button" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade in" id="download-desktop-modal" tabindex="-1" role="dialog" style="display: none; padding-left: 0px; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="lw_close_3" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">从环境中导出代码</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        将需要的代码文件放入到“/tmp/{{ user.username }}”目录，点击下载会把该目录打包下载。
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="lw_close_4" class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+                    <button id="download" class="btn btn-default" type="button" data-dismiss="modal">下载</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade in" id="stop-desktop-modal" tabindex="-1" role="dialog" style="display: none; padding-left: 0px; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="lw_close_5" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">停止实验</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        停止后，整个环境将被删除，是否保存环境？
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="yes" class="btn btn-default" type="button" value="yes" data-dismiss="modal">保存</button>
+                    <button id="no" class="btn btn-default" type="button" value="no" data-dismiss="modal">不保存</button>
+                    <button id="lw_close_6" class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#lw_labdoc').click(function () {
+                $('#labdoc').show();
+                $('#report').hide();
+                $('#lw_labdoc').addClass('active');
+                $('#lw_report').removeClass('active');
+            });
+            $('#lw_report').click(function () {
+                editormd("test-editormd", {
+                    width  : "100%",
+                    height : 740,
+                    path   : "/statics/website/editor.md-master/lib/",
+                    saveHTMLToTextarea : true,
+                    watch : false,
+                    toolbarIcons : function() {
+                        return ["bold", "italic", "quote", "h1", "h2", "h3", "list-ul", "list-ol", "link", "image", "code", "code-block", "|", "watch", "help"]
+                    },
+                });
+
+                $('#labdoc').hide();
+                $('#report').show();
+                $('#lw_labdoc').removeClass('active');
+                $('#lw_report').addClass('active');
+            });
+            var url = window.location.href;
+            if (url.endsWith('#report')) {
+                $('#lw_report').click();
+            }
+
+            // 显示与隐藏桌面
+            $('#hide-desktop').click(function () {
+                if ($('#hide-desktop').text() === '隐藏桌面') {
+                    $('#lw_lab-container').css('width','100%');
+                    $('#display').css('width','0px');
+                    $('#hide-desktop').text('显示桌面');
+                }
+                else {
+                    $('#lw_lab-container').css('width','36%');
+                    $('#display').css('width','64%');
+                    $('#hide-desktop').text('隐藏桌面');
+                }
+            });
+
+            // 显示与隐藏工具栏
+            $('#hide-tools').click(function () {
+                if ($('#hide-tools').text() === '隐藏工具栏') {
+                    $('#tools').css('width','0px');
+                    $('#hide-tools').text('显示工具栏');
+                }
+                else {
+                    $('#tools').css('width','auto');
+                    $('#hide-tools').text('隐藏工具栏');
+                }
+            });
+
+            // 计时器
+            var m = 0, s = 0;
+            function timer() {
+                ++s;
+                if (s === 60) {
+                    s = 0;
+                    m = m + 1;
+                }
+                if (m !== 0 && m % 10 === 0 && s === 0) {
+                    $.get('/add_minutes/',{
+                        minute: m
+                    });
+                }
+                var str_m, str_s;
+                if (s < 10) {
+                    str_s = '0' + s;
+                } else
+                    str_s = s;
+                if (m < 10) {
+                    str_m = '0' + m;
+                } else
+                    str_m = m;
+                $('#lw_time > span').text(str_m + ' : ' + str_s);
+                setTimeout(timer, 1000);
+            }
+            timer();
+            // 切换界面
+
+            // 停止实验
+            $('#stop-desktop-btn').click(function () {
+                $('#stop-desktop-modal').css('display','block');
+            });
+            $('#lw_close_5').click(function () {
+                $('#stop-desktop-modal').css('display','none');
+            });
+            $('#lw_close_6').click(function () {
+                $('#stop-desktop-modal').css('display','none');
+            });
+            $('#yes').click(function () {
+                window.location.href = '/course/{{ lab.course.cid }}';
+            });
+            $('#no').click(function () {
+                var no = $('#no').attr('value');
+                $.get('/stop_vnc/', function (responseText) {
+                    if (responseText.success) {
+                        window.location.href = '/course/{{ lab.course.cid }}';
+                    } else {
+                        alert(responseText.message);
+                    }
+                });
+            });
+
+            // 下个实验
+            var None;
+            if ({{ next_lab_id }} !== None) {
+                $('#next-lab-btn').css('display','block');
+            }
+
+            // 共享桌面
+            $('#share-desktop-btn').click(function () {
+                $('#share-desktop-modal').css('display','block');
+            });
+            $('#lw_close_1').click(function () {
+                $('#share-desktop-modal').css('display','none');
+            });
+            $('#lw_close_2').click(function () {
+                $('#share-desktop-modal').css('display','none');
+            });
+            $('#readonly-share-url').click(function () {
+                var Url = $('#readonly-share-url');
+                // 选择对象
+                Url.select();
+                // 执行浏览器复制命令
+                document.execCommand("Copy");
+                $('#readonly-share-alert').text('已复制成功！').show();
+            });
+            $('#cooperation-share-url').click(function () {
+                var Url = $('#cooperation-share-url');
+                // 选择对象
+                Url.select();
+                // 执行浏览器复制命令
+                document.execCommand("Copy");
+                $('#cooperation-share-alert').text('已复制成功！').show();
+            });
+
+            // 下载代码
+            $('#download-desktop-btn').click(function () {
+                $('#download-desktop-modal').css('display','block');
+            });
+            $('#lw_close_3').click(function () {
+                $('#download-desktop-modal').css('display','none');
+            });
+            $('#lw_close_4').click(function () {
+                $('#download-desktop-modal').css('display','none');
+            });
+            $('#download').click(function () {
+                $.get('/download_code/',function (responseText) {
+                    if (responseText.success) {
+                        window.location.href = responseText.url;
+                    } else
+                        alert(responseText.message);
+                });
+            });
+
+            // 桌面全屏
+            var a = 0;
+            $('#fullscreen-btn').click(function () {
+                ++a;
+                if (a % 2 !== 0) {
+                    $('#lw_lab-container').css('width','0px');
+                    $('#display').css('width','100%');
+                } else {
+                    $('#lw_lab-container').css('width','36%');
+                    $('#display').css('width','64%');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

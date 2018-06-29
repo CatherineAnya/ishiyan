@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+    <link type="text/css" rel="stylesheet" href="{% static 'website/css/courses.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container lw_all-label">
+        <div class="row">
+            <div class="col-md-12 lw_all-content">
+                <div class="col-md-1 lw_all-label-title">
+                    标签：
+                </div>
+                <div class="col-md-11 lw_all-label-tag">
+                    <a class="lw_label-padding" id="all" href="/courses/?tag=all">全部</a>
+                    {% for alllabel in alllabel_list %}
+                    <a class="lw_label-padding" id="{{ alllabel.name }}" href="/courses/?tag={{ alllabel.name }}">{{ alllabel.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-12 lw_all-courses">
+                <div class="row">
+                    {% for allcourses in allcourses_list %}
+                    <div class="col-md-3 lw_all-courses-course">
+                        <a class="lw_all-courses-box" href="/course/{{ allcourses.cid }}">
+                            <div class="lw_all-courses-img">
+                                <img alt="{{ allcourses.name }}" src="{% static 'website/img/course/' %}{{ allcourses.image }}">
+                            </div>
+                            <div id="lw_all-courses-body" class="lw_all-courses-body">
+                                <div class="lw_all-courses-name">{{ allcourses.name }}</div>
+                                <div class="lw_all-courses-desc">{{ allcourses.description }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-12 lw_paging">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li id="lw_prev">
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">上一页</span>
+                            </a>
+                        </li>
+                        <li id="page1"><a href="#">1</a></li>
+                        <li id="page2"><a href="#">2</a></li>
+                        <li id="page3"><a href="#">3</a></li>
+                        <li id="page4"><a href="#">4</a></li>
+                        <li id="page5"><a href="#">5</a></li>
+                        <li id="lw_next">
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">下一页</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script%}
+    <script type="text/javascript">
+		$(function () {
+			$('.lw_all-courses-box').hover(function () {
+			    $('.lw_all-courses-body',this).css('bottom','55px');
+			    $('.lw_all-courses-desc',this).css('height','54px');
+            },function () {
+                $('.lw_all-courses-body',this).css('bottom','0');
+			    $('.lw_all-courses-desc',this).css('height','0');
+            });
+
+			function getUrlParam(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return decodeURI(r[2]);
+                return null;
+            }
+            var uri = getUrlParam('tag');
+			if (uri === null) {
+			    $('#all').addClass('lw_active');
+            }
+            else {
+			     var id = "#" + uri;
+			     $(id).addClass('lw_active');
+            }
+		});
+	</script>
+
+    <!--分页技术-->
+    <script type="text/javascript">
+		$(function () {
+			function getUrlParam(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return decodeURI(r[2]);
+                return null;
+            }
+            var page = Number(getUrlParam('page'));
+			if (!page) {
+			    page = 1;
+            }
+			var total_page = {{ total_page }};
+			var uri = window.location.pathname + window.location.search;
+			if (uri.indexOf('page=') === -1) {
+			    if (uri.indexOf('?') !== -1) {
+                    uri += '&page=1';
+                } else {
+			        uri += '?page=1';
+                }
+            }
+			if (page === 1) {
+			    $('#lw_prev').addClass('disabled');
+			    $('#page1').addClass('active');
+            }
+            else if (page === 2) {
+			    $('#page2').addClass('active');
+            }
+            else if (page === total_page - 1) {
+			    $('#page1 > a').text(page - 3);
+			    $('#page2 > a').text(page - 2);
+			    $('#page3 > a').text(page - 1);
+			    $('#page4 > a').text(page);
+			    $('#page5 > a').text(page + 1);
+			    $('#page4').addClass('active');
+            }
+            else if (page === total_page) {
+			    $('#lw_next').addClass('disabled');
+                $('#page1 > a').text(page - 4);
+			    $('#page2 > a').text(page - 3);
+			    $('#page3 > a').text(page - 2);
+			    $('#page4 > a').text(page - 1);
+                $('#page5 > a').text(page);
+			    $('#page5').addClass('active');
+            }
+            else {
+			    $('#page1 > a').text(page - 2);
+                $('#page2 > a').text(page - 1);
+                $('#page3 > a').text(page);
+                $('#page4 > a').text(page + 1);
+			    $('#page5 > a').text(page + 2);
+			    $('#page3').addClass('active');
+            }
+            for (var i = 1; i <= 5; i++) {
+			    $('#page' + i + ' > a').attr('href', uri.replace(/page=\d+/, 'page=' + $('#page' + i + ' > a').text()));
+            }
+            $('#lw_prev > a').attr('href',uri.replace(/page=\d+/,'page=' + (page - 1)));
+            $('#lw_next > a').attr('href',uri.replace(/page=\d+/,'page=' + (page + 1)));
+		});
+	</script>
+{% endblock %}

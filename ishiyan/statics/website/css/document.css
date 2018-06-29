@@ -1,0 +1,194 @@
+body {
+	background-color: #f8fafc;
+}
+/* 路径导航 */
+.lw_doc-layout {
+	min-height: 100%;
+    margin-top: 25px;
+}
+.breadcrumb {
+	margin: 0;
+    padding: 10px 0;
+    font-size: 13px;
+    background: transparent;
+    border-radius: 0;
+}
+.breadcrumb li a {
+    color: #666;
+    text-decoration: none;
+}
+.breadcrumb li a:hover {
+    color: #00c894;
+}
+/* 课程介绍 */
+.lw_doc-body {
+	padding: 0 5px;
+}
+.lw_doc-body-content {
+	position: relative;
+	padding-bottom: 30px !important;
+    margin-bottom: 15px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+.lw_doc-body-header {
+	overflow: hidden;
+}
+.lw_doc-body-title {
+	display: inline-block;
+    font-size: 21px;
+    margin: 0;
+    line-height: 1.6;
+}
+.lw_doc-body-description {
+	margin: 16px 0 0;
+    color: #4c5157;
+    font-size: 15px;
+    word-wrap: break-word;
+}
+.lw_doc-body-price {
+	margin-top: 27px;
+}
+.lw_doc-body-price a {
+	padding: 10px 78px;
+    font-size: 16px;
+}
+.btn-primary:hover {
+    background-color: #00c894;
+	border-color: #00a075;
+}
+/* 实验列表 */
+.nav-tabs {
+	margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover,
+.nav-tabs > li > a:focus, .nav-tabs > li > a:hover {
+    color: #4c5157;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-bottom-color: #00c894;
+}
+.lw_doc-lab-item {
+	position: relative;
+    margin: 12px 0;
+    border: 1px solid #eee;
+}
+.lw_doc-item-header {
+	background: #f7f7f7;
+    border-bottom: 1px solid #eee;
+    padding-right: 10px;
+    height: 55px;
+}
+.lw_doc-lab-item .lw_doc-item-header > div {
+    display: inline-block;
+    margin: 0 12px;
+    padding: 14px 0;
+    font-size: 16px;
+    vertical-align: middle;
+}
+.lw_doc-item-index {
+    color: #999;
+}
+.lw_doc-item-title {
+    max-width: 450px;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.lw_doc-lab-item .lw_doc-item-header > div.lw_doc-item-ctrl {
+    padding: 0;
+    margin: 10px 0 0;
+    z-index: 10;
+}
+.lw_doc-lab-item .lw_doc-item-content {
+    padding: 0 20px;
+}
+/* 上传用户 */
+.lw_doc-side {
+	padding: 0 5px;
+}
+.lw_doc-side-image {
+	position: relative;
+	margin-bottom: 10px;
+    background: #fff;
+    text-align: center;
+}
+.lw_doc-side-image img {
+	width: 100%;
+}
+.lw_doc-side-box {
+	margin-bottom: 10px;
+    padding: 15px;
+    background: #fff;
+}
+.lw_doc-box-header {
+	overflow: hidden;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #eee;
+}
+.lw_doc-box-title {
+	color: #666;
+	float: left;
+    margin: 0;
+    font-size: 16px;
+}
+.lw_doc-box-body {
+	padding: 10px 0;
+    font-size: 14px;
+}
+.lw_doc-box-body .lw_doc-body-headportrait {
+    display: block;
+    float: left;
+    width: 64px;
+    height: 64px;
+    margin-right: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.lw_doc-box-body img {
+	width: 100%;
+}
+.lw-doc-box-info .lw-doc-info-name {
+    font-size: 15px;
+    margin-right: 10px;
+    color: #4c5157;
+}
+.lw-doc-box-info div {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #4c5157;
+}
+.lw-doc-extra-info {
+	padding: 5px;
+    clear: both;
+}
+.lw-doc-extra-info div {
+	font-size: 14px;
+    color: #4c5157;
+    line-height: 24px;
+}
+.lw_doc-box-footer {
+	overflow: hidden;
+}
+.lw_doc-box-footer a {
+	float: right;
+    font-size: 14px;
+    color: #529fd2;
+    text-decoration: none;
+}
+/* 相关课程 */
+.lw_doc-adv-course > a {
+    display: block;
+    padding: 12px;
+    color: #4c5157;
+    font-size: 14px;
+    text-decoration: none;
+}
+.lw_doc-adv-course > a:hover {
+    background-color: #ddd;
+    color: #00c894;
+}
