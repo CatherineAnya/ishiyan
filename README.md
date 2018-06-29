@@ -17,5 +17,23 @@ Online experiment platform
 4.通过动手实验来编写实验报告，保存后可对报告进行编辑、下载、删除等操作
 
 技术栈：HTML、CSS、jQuery、AJAX、MySQL、Django、Guacamole、VNC
-# 效果展示
+# 部分效果展示
+1.首页
+
 ![image](https://user-images.githubusercontent.com/26202472/42084719-177e23ac-7bc1-11e8-8a7d-beef5e6f91bd.png)
+
+2.搜索
+
+![image](https://user-images.githubusercontent.com/26202472/42085013-dad442aa-7bc1-11e8-9c4d-0bf03288b678.png)
+
+3.讨论
+
+![image](https://user-images.githubusercontent.com/26202472/42085105-12ffa52a-7bc2-11e8-8416-d6f927d307de.png)
+
+4.虚拟桌面
+
+![image](https://user-images.githubusercontent.com/26202472/42084887-88c646d4-7bc1-11e8-909d-a321a5e866c1.png)
+
+5.实验报告
+
+![image](https://user-images.githubusercontent.com/26202472/42085383-d8b9011c-7bc2-11e8-8f54-55f47fbee6da.png)
