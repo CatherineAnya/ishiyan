@@ -37,3 +37,6 @@ Online experiment platform
 5.实验报告
 
 ![image](https://user-images.githubusercontent.com/26202472/42085383-d8b9011c-7bc2-11e8-8f54-55f47fbee6da.png)
+
+# 过程中遇到的问题
+在服务器上部署Guacamole、VNC、Tomcat时很糟心，直到第三次才完全部署成功，部署过程就是使用终端来安装，但是其中版本兼容性问题不可忽略，并且需要注意细节。
